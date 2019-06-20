@@ -1,2 +1,3 @@
 # yab-fetch
-Awesome fetch library for React?
+
+专注于开发者体验的请求库

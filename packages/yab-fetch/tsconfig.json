@@ -3,6 +3,6 @@
     "module": "es6",
     "target": "esnext",
     "strict": true,
-    "lib": ["es2018", "esnext"]
+    "lib": ["es2018", "esnext", "dom"]
   }
 }
