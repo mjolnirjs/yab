@@ -1,10 +1,13 @@
 import { RequestOptions } from '../types/index';
+import * as qs from 'qs';
 
 export function appendURLParams(url: string, paramString: string) {
   return url + (url.includes('?') ? '&' : '?') + paramString;
 }
 
-export function createURL(url: string) {}
+export function createURL(url: string, params) {
+  return appendURLParams(url, qs.stringify(params));
+}
 
 export function isAbsoluteURL(url: string) {
   // A URL is considered absolute if it begins with "<scheme>://" or "//" (protocol-relative URL).
