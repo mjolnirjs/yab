@@ -1,1 +1,3 @@
-export interface RequestOptions extends RequestInit {}
+export interface RequestOptions extends RequestInit {
+  onError: unknown;
+}
