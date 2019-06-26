@@ -1,8 +1,6 @@
 import { RequestOptions } from './types/index';
 import { mergeRequestOptions, createURL } from './utils/index';
 
-const browserFetch = window.fetch;
-
 function defaultErrorHandler(err: Error): Error {
   // eslint-disable-next-line no-console
   console.error(`Error in yab-fetch`, err);
@@ -10,11 +8,13 @@ function defaultErrorHandler(err: Error): Error {
 }
 
 export function createFetch(
-  requestOptions: RequestOptions
-): (url: string, fetchOptions: RequestOptions) => Promise<unknown> {
+  requestOptions?: RequestOptions
+): (url: string, fetchOptions?: RequestOptions) => Promise<unknown> {
+  const browserFetch = window.fetch;
+
   function currentFetch(
     directURL: string,
-    directOptions: RequestOptions
+    directOptions?: RequestOptions
   ): Promise<unknown> {
     const actualOptions = mergeRequestOptions(
       {
@@ -26,7 +26,13 @@ export function createFetch(
 
     const url = createURL(directURL, actualOptions.params);
 
-    return browserFetch(url, actualOptions).catch(defaultErrorHandler);
+    // TODO: Pick all valid options
+    const rawOptions = {
+      ...actualOptions
+    };
+    delete rawOptions.onError;
+
+    return browserFetch(url, rawOptions).catch(defaultErrorHandler);
   }
 
   return currentFetch;

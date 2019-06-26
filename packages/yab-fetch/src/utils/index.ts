@@ -25,12 +25,12 @@ export function isAbsoluteURL(url: string): boolean {
 }
 
 export function mergeRequestOptions(
-  ...sources: RequestOptions[]
+  ...sources: (RequestOptions | undefined)[]
 ): RequestOptions {
   const headers = {};
 
   sources.forEach((sourceItem): void => {
-    Object.assign(headers, sourceItem.headers);
+    Object.assign(headers, sourceItem && sourceItem.headers);
   });
 
   return Object.assign({}, ...sources, { headers });
