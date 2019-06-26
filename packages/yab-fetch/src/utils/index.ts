@@ -8,8 +8,12 @@ export function appendURLParams(url: string, paramString: string): string {
 
 export function createURL(
   url: string,
-  params: Record<string, unknown>
+  params?: Record<string, unknown>
 ): string {
+  if (params == null) {
+    return url;
+  }
+
   return appendURLParams(url, qs.stringify(params));
 }
 

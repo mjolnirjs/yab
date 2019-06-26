@@ -1,3 +1,4 @@
 export interface RequestOptions extends RequestInit {
-  onError: unknown;
+  params?: Record<string, string | string[]>;
+  onError?: unknown;
 }

@@ -24,7 +24,7 @@ export function createFetch(
       directOptions
     );
 
-    const url = createURL(directURL, actualOptions);
+    const url = createURL(directURL, actualOptions.params);
 
     return browserFetch(url, actualOptions).catch(defaultErrorHandler);
   }
