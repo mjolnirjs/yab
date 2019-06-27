@@ -1,5 +1,5 @@
-import { RequestOptions } from './types/index';
-import { mergeRequestOptions, createURL } from './utils/index';
+import { YabRequestInit, YabFetcher } from './types/index';
+import { getYabRequestIniit, createURL, getRequestInit } from './utils/index';
 
 function defaultErrorHandler(err: Error): Error {
   // eslint-disable-next-line no-console
@@ -7,33 +7,24 @@ function defaultErrorHandler(err: Error): Error {
   throw err;
 }
 
-export function createFetch(
-  requestOptions?: RequestOptions
-): (url: string, fetchOptions?: RequestOptions) => Promise<unknown> {
+export function createFetch(requestInit?: YabRequestInit): YabFetcher {
   const browserFetch = window.fetch;
 
-  function currentFetch(
-    directURL: string,
-    directOptions?: RequestOptions
-  ): Promise<unknown> {
-    const actualOptions = mergeRequestOptions(
+  const currentFetch: YabFetcher = (directURL, directOptions) => {
+    const yabRequestInit = getYabRequestIniit(
       {
         onError: defaultErrorHandler
       },
-      requestOptions,
+      requestInit,
       directOptions
     );
 
-    const url = createURL(directURL, actualOptions.params);
+    const url = createURL(directURL, yabRequestInit.params);
 
-    // TODO: Pick all valid options
-    const rawOptions = {
-      ...actualOptions
-    };
-    delete rawOptions.onError;
-
-    return browserFetch(url, rawOptions).catch(defaultErrorHandler);
-  }
+    return browserFetch(url, getRequestInit(yabRequestInit)).catch(
+      defaultErrorHandler
+    );
+  };
 
   return currentFetch;
 }

@@ -10,6 +10,5 @@ test('createFetch', () => {
   fetcher('github.com');
 
   expect(fetcher).toBeInstanceOf(Function);
-  expect((window.fetch as any).mock.calls[0][0]).toEqual('github.com');
-  expect((window.fetch as any).mock.calls[0][1]).toEqual({ headers: {} });
+  expect((window.fetch as any).mock.calls[0]).toEqual(['github.com', {}]);
 });

@@ -3,6 +3,8 @@
     "module": "es6",
     "rootDir": "src",
     "strict": true,
-    "lib": ["es2018", "esnext", "dom"]
+    "lib": ["es2018", "esnext", "dom"],
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
   }
 }

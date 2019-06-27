@@ -1,6 +1,7 @@
 import * as qs from 'qs';
+import omit from 'lodash.omit';
 
-import { RequestOptions } from '../types/index';
+import { YabRequestInit, RequestHeaders } from '../types/index';
 
 export function appendURLParams(url: string, paramString: string): string {
   return url + (url.includes('?') ? '&' : '?') + paramString;
@@ -24,14 +25,21 @@ export function isAbsoluteURL(url: string): boolean {
   return /^([a-z][a-z\d+\-.]*:)?\/\//i.test(url);
 }
 
-export function mergeRequestOptions(
-  ...sources: (RequestOptions | undefined)[]
-): RequestOptions {
-  const headers = {};
+export function getYabRequestIniit(
+  ...sources: (YabRequestInit | undefined)[]
+): YabRequestInit {
+  let headers: RequestHeaders = undefined;
 
   sources.forEach((sourceItem): void => {
-    Object.assign(headers, sourceItem && sourceItem.headers);
+    if (sourceItem && sourceItem.headers) {
+      headers = headers || {};
+      Object.assign(headers, sourceItem.headers);
+    }
   });
 
   return Object.assign({}, ...sources, { headers });
+}
+
+export function getRequestInit(yabRequestInit: YabRequestInit): RequestInit {
+  return omit(yabRequestInit, ['onError']);
 }
