@@ -1,4 +1,4 @@
-import { YabRequestInit, YabFetcher } from './types/index';
+import { YabRequestInit, YabFetcher, MethodType } from './types/index';
 import { getYabRequestIniit, createURL, getRequestInit } from './utils/index';
 
 function defaultErrorHandler(err: Error): Error {
@@ -10,7 +10,7 @@ function defaultErrorHandler(err: Error): Error {
 export function createFetch(requestInit?: YabRequestInit): YabFetcher {
   const browserFetch = window.fetch;
 
-  const currentFetch: YabFetcher = (directURL, directOptions) => {
+  const currentFetch = ((directURL: string, directOptions?: YabRequestInit) => {
     const yabRequestInit = getYabRequestIniit(
       {
         onError: defaultErrorHandler
@@ -24,7 +24,20 @@ export function createFetch(requestInit?: YabRequestInit): YabFetcher {
     return browserFetch(url, getRequestInit(yabRequestInit)).catch(
       defaultErrorHandler
     );
-  };
+  }) as YabFetcher;
+
+  (['get', 'delete'] as MethodType[]).forEach((method) => {
+    currentFetch[method] = (url: string, yabInit?: YabRequestInit) =>
+      currentFetch(url, getYabRequestIniit({ method }, yabInit));
+  });
+
+  (['post', 'put', 'patch'] as MethodType[]).forEach((method) => {
+    currentFetch[method] = (
+      url: string,
+      data?: unknown,
+      yabInit?: YabRequestInit
+    ) => currentFetch(url, getYabRequestIniit({ method, data }, yabInit));
+  });
 
   return currentFetch;
 }
