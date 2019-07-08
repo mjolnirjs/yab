@@ -1,7 +1,11 @@
 import * as qs from 'qs';
 import omit from 'lodash.omit';
 
-import { YabRequestInit, RequestHeaders } from '../types/index';
+import {
+  YabRequestInit,
+  RequestHeaders,
+  ExcutableYabRequestInit
+} from '../types/index';
 
 export function appendURLParams(url: string, paramString: string): string {
   return url + (url.includes('?') ? '&' : '?') + paramString;
@@ -26,9 +30,9 @@ export function isAbsoluteURL(url: string): boolean {
 }
 
 export function getYabRequestInit(
-  ...sources: (YabRequestInit | undefined)[]
-): YabRequestInit {
-  let headers: RequestHeaders = undefined;
+  ...sources: (Partial<YabRequestInit> | undefined)[]
+): ExcutableYabRequestInit {
+  let headers: RequestHeaders;
 
   sources.forEach((sourceItem): void => {
     if (sourceItem && sourceItem.headers) {
@@ -37,9 +41,15 @@ export function getYabRequestInit(
     }
   });
 
-  return Object.assign({}, ...sources, { headers });
+  const init: ExcutableYabRequestInit = Object.assign({}, ...sources, {
+    headers
+  });
+
+  const url = createURL(init.url, init.params);
+
+  return { ...init, url };
 }
 
 export function getRequestInit(yabRequestInit: YabRequestInit): RequestInit {
-  return omit(yabRequestInit, ['onError']);
+  return omit(yabRequestInit, ['onError', 'url', 'resolveData']);
 }

@@ -1,5 +1,10 @@
-import { YabRequestInit, YabFetcher, MethodType } from './types/index';
-import { getYabRequestInit, createURL, getRequestInit } from './utils/index';
+import {
+  YabRequestInit,
+  YabFetcher,
+  MethodType,
+  CreateYabRequestInit
+} from './types/index';
+import { getYabRequestInit, getRequestInit } from './utils/index';
 
 function defaultErrorHandler(err: Error): Error {
   // eslint-disable-next-line no-console
@@ -7,28 +12,30 @@ function defaultErrorHandler(err: Error): Error {
   throw err;
 }
 
-export function createFetch(requestInit?: YabRequestInit): YabFetcher {
+export function createFetch<TResponseType>(
+  requestInit: CreateYabRequestInit
+): YabFetcher<TResponseType> {
   const browserFetch = window.fetch;
 
-  const currentFetch = ((directURL: string, directOptions?: YabRequestInit) => {
+  const currentFetch = ((url: string, directOptions?: YabRequestInit) => {
     const yabRequestInit = getYabRequestInit(
       {
         onError: defaultErrorHandler
       },
       requestInit,
-      directOptions
+      directOptions,
+      { url }
     );
 
-    const url = createURL(directURL, yabRequestInit.params);
-
-    return browserFetch(url, getRequestInit(yabRequestInit)).catch(
-      defaultErrorHandler
-    );
-  }) as YabFetcher;
+    return browserFetch(
+      yabRequestInit.url,
+      getRequestInit(yabRequestInit)
+    ).then(yabRequestInit.resolveData, yabRequestInit.onError);
+  }) as YabFetcher<TResponseType>;
 
   (['get', 'delete'] as MethodType[]).forEach((method) => {
     currentFetch[method] = (url: string, yabInit?: YabRequestInit) =>
-      currentFetch(url, {method, ...yabInit});
+      currentFetch(url, { method, ...yabInit });
   });
 
   (['post', 'put', 'patch'] as MethodType[]).forEach((method) => {
