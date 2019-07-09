@@ -1,0 +1,72 @@
+# https://circleci.com/docs/2.0/configuration-reference/
+version: 2.1
+# alias
+
+# executors (requires version: 2.1)
+executors:
+  node8:
+    docker:
+      - image: circleci/node:8
+
+  node10:
+    docker:
+      - image: circleci/node:10
+
+# commands (requires version: 2.1)
+commands:
+  yarn_install:
+    steps:
+      - run:
+          name: Installing Dependencies
+          command: yarn install --frozen-lockfile
+  yarn_lint:
+    steps:
+      - run:
+          name: Linting
+          command: yarn lint
+  yarn_test:
+    steps:
+      - run:
+          name: Testing
+          command: yarn test
+  yarn_build:
+    steps:
+      - run:
+          name: Building
+          command: yarn build
+
+# jobs
+# If you are not using workflows, the jobs map must contain a job named build. This build job is the default entry-point for a run
+jobs:
+  build:
+    executor: node10
+
+    steps:
+      - checkout
+      - yarn_install
+      - yarn_build
+
+  test-node10:
+    executor: node10
+
+    steps:
+      - checkout
+      - yarn_install
+      - yarn_test
+
+  test-node8:
+    executor: node8
+
+    steps:
+      - checkout
+      - yarn_install
+      - yarn_test
+
+# If you are using Workflows, jobs must have a name that is unique.
+workflows:
+  version: 2
+  build-flow:
+    jobs:
+      - build
+      - test-node8
+      - test-node10

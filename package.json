@@ -11,7 +11,9 @@
     "changelog": "lerna-changelog",
     "update": "lerna updated",
     "publish": "lerna publish",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "lerna run lint",
+    "build": "lerna run build:lib",
+    "test": "lerna run test"
   },
   "repository": {
     "type": "git",
