@@ -19,17 +19,22 @@ commands:
       - run:
           name: Installing Dependencies
           command: yarn install --frozen-lockfile
-  yarn_lint:
+  lerna_bootstrap:
+    steps:
+      - run:
+          name: Lerna Bootstraping...
+          command: yarn run bootstrap
+  lerna_lint:
     steps:
       - run:
           name: Linting
           command: yarn lint
-  yarn_test:
+  lerna_test:
     steps:
       - run:
           name: Testing
           command: yarn test
-  yarn_build:
+  lerna_build:
     steps:
       - run:
           name: Building
@@ -44,7 +49,8 @@ jobs:
     steps:
       - checkout
       - yarn_install
-      - yarn_build
+      - lerna_bootstrap
+      - lerna_build
 
   test-node10:
     executor: node10
@@ -52,7 +58,8 @@ jobs:
     steps:
       - checkout
       - yarn_install
-      - yarn_test
+      - lerna_bootstrap
+      - lerna_test
 
   test-node8:
     executor: node8
@@ -60,7 +67,8 @@ jobs:
     steps:
       - checkout
       - yarn_install
-      - yarn_test
+      - lerna_bootstrap
+      - lerna_test
 
 # If you are using Workflows, jobs must have a name that is unique.
 workflows:
