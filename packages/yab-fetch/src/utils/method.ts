@@ -1,7 +1,8 @@
 export enum Method {
   get,
-  delete,
+  head,
   post,
   put,
+  delete,
   patch
 }

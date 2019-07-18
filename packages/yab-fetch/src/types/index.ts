@@ -7,40 +7,79 @@ export type RequestParams = Record<string, string> | undefined;
 export interface YabRequestInit extends RequestInit {
   baseURL?: string;
   params?: RequestParams;
-  data?: unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  data?: any;
   url?: string;
-  resolveData?(data: Response): unknown;
-  onError?(err: Error): unknown;
-}
-
-export interface CreateYabRequestInit extends YabRequestInit {
-  resolveData(data: Response): unknown;
+  contentType?: 'auto' | 'json' | 'text';
+  resolveData?(context: IYabFetchContext): Promise<unknown>;
+  validateResponseStatus?(status: Response['status']): boolean;
+  before?(requestInit: RequestInit): RequestInit;
+  after?(response: Response): Response;
 }
 
 export interface ExcutableYabRequestInit extends YabRequestInit {
   url: string;
-  onError(err: Error): unknown;
+  contentType: 'json' | 'text' | 'auto';
 }
 
-export interface YabFetcher<TResponseType> {
-  (url: string, init?: YabRequestInit): Promise<TResponseType>;
-  get(url: string, config?: YabRequestInit): Promise<TResponseType>;
-  delete(url: string, config?: YabRequestInit): Promise<TResponseType>;
+export interface YabFetcher<TFetchResult> {
+  (url: string, init?: YabRequestInit): Promise<TFetchResult>;
+  get(url: string, config?: YabRequestInit): Promise<TFetchResult>;
+  head(url: string, config?: YabRequestInit): Promise<TFetchResult>;
+  delete(url: string, config?: YabRequestInit): Promise<TFetchResult>;
   post(
     url: string,
     data?: unknown,
     config?: YabRequestInit
-  ): Promise<TResponseType>;
+  ): Promise<TFetchResult>;
   put(
     url: string,
     data?: unknown,
     config?: YabRequestInit
-  ): Promise<TResponseType>;
+  ): Promise<TFetchResult>;
   patch(
     url: string,
     data?: unknown,
     config?: YabRequestInit
-  ): Promise<TResponseType>;
+  ): Promise<TFetchResult>;
+  use(middlware: YabFetchMiddleware): void;
 }
 
 export type MethodType = keyof typeof Method;
+
+export interface IYabFetchContext {
+  // **Request**
+  yabRequestInit: YabRequestInit;
+
+  // **Response**
+  response: Response;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  json?: any;
+  text?: string;
+
+  // **Error**
+  error: YabFetchError | undefined;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any;
+}
+
+export type YabFetchMiddleware = (
+  context: IYabFetchContext,
+  next: () => Promise<unknown>
+) => void;
+
+export interface YabFetchErrorOptions {
+  error?: Error;
+  errorMessage?: string;
+  yabRequestInit: ExcutableYabRequestInit;
+  requestInit: RequestInit;
+  response?: Response;
+}
+
+export interface YabFetchError extends Error {
+  yabRequestInit: ExcutableYabRequestInit;
+  requestInit: RequestInit;
+  response?: Response;
+}

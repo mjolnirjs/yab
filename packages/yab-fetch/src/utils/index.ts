@@ -1,5 +1,4 @@
 import * as qs from 'qs';
-import omit from 'lodash.omit';
 
 import {
   YabRequestInit,
@@ -50,6 +49,49 @@ export function getYabRequestInit(
   return { ...init, url };
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function isJSONObject(val: any) {
+  return val !== null && typeof val === 'object';
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function isFormData(val: any) {
+  return typeof FormData !== 'undefined' && val instanceof FormData;
+}
+
 export function getRequestInit(yabRequestInit: YabRequestInit): RequestInit {
-  return omit(yabRequestInit, ['onError', 'url', 'resolveData']);
+  const requestInit: RequestInit = {};
+
+  const { data } = yabRequestInit;
+
+  if (data != null) {
+    // TODO: handle all request body types
+    if (isFormData(data)) {
+      requestInit.body = data;
+    } else if (isJSONObject(data)) {
+      requestInit.body = JSON.stringify(data);
+    }
+  }
+
+  ([
+    'cache',
+    'credentials',
+    'headers',
+    'integrity',
+    'keepalive',
+    'method',
+    'mode',
+    'redirect',
+    'referrer',
+    'referrerPolicy',
+    'signal',
+    'window',
+    'body'
+  ] as (keyof RequestInit)[]).forEach((nativeRequestInitKey) => {
+    if (yabRequestInit[nativeRequestInitKey]) {
+      requestInit[nativeRequestInitKey] = yabRequestInit[nativeRequestInitKey];
+    }
+  });
+
+  return requestInit;
 }

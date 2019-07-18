@@ -9,6 +9,8 @@ module.exports = {
   ],
   rules: {
     'import/prefer-default-export': 'off',
-    '@typescript-eslint/explicit-function-return-type': 'off'
+    'no-underscore-dangle': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/interface-name-prefix': 'off'
   }
 };
