@@ -6,14 +6,14 @@ import {
   MethodType,
   YabFetchMiddleware,
   IYabFetchContext,
-  ExcutableYabRequestInit
+  ExecutableYabRequestInit
 } from '../types/index';
 import { getYabRequestInit, getRequestInit } from '../utils';
 import { YabFetchContext } from './context';
 import { DEFAULT_INIT } from '../defaults';
 import { createError } from './error';
 
-function createFetchMiddleware(yabRequestInit: ExcutableYabRequestInit) {
+function createFetchMiddleware(yabRequestInit: ExecutableYabRequestInit) {
   // TODO:
   const browserFetch = window.fetch;
 

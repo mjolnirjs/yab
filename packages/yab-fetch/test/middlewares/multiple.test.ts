@@ -3,8 +3,6 @@ import 'whatwg-fetch';
 import { createFetch } from '../../src/core/fetch';
 
 test('middleware: json', async () => {
-  let lock = false;
-
   window.fetch = jest.fn(() =>
     Promise.resolve(new Response('{"data":"data"}'))
   );

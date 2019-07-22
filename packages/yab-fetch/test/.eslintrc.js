@@ -1,7 +1,8 @@
 module.exports = {
   extends: ['../.eslintrc.js'],
   rules: {
-    '@typescript-eslint/explicit-function-return-type': false,
-    'import/no-extraneous-dependencies': false
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    'import/no-extraneous-dependencies': 'off',
+    'no-param-reassign': 'off'
   }
 };

@@ -3,7 +3,7 @@ import * as qs from 'qs';
 import {
   YabRequestInit,
   RequestHeaders,
-  ExcutableYabRequestInit
+  ExecutableYabRequestInit
 } from '../types/index';
 
 export function appendURLParams(url: string, paramString: string): string {
@@ -30,7 +30,7 @@ export function isAbsoluteURL(url: string): boolean {
 
 export function getYabRequestInit(
   ...sources: (Partial<YabRequestInit> | undefined)[]
-): ExcutableYabRequestInit {
+): ExecutableYabRequestInit {
   let headers: RequestHeaders;
 
   sources.forEach((sourceItem): void => {
@@ -40,7 +40,7 @@ export function getYabRequestInit(
     }
   });
 
-  const init: ExcutableYabRequestInit = Object.assign({}, ...sources, {
+  const init: ExecutableYabRequestInit = Object.assign({}, ...sources, {
     headers
   });
 
