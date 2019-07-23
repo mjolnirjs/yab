@@ -49,7 +49,7 @@ export type MethodType = keyof typeof Method;
 
 export interface IYabFetchContext {
   // **Request**
-  yabRequestInit: YabRequestInit;
+  yabRequestInit: ExecutableYabRequestInit;
 
   // **Response**
   response: Response;
