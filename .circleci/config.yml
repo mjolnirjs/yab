@@ -2,6 +2,10 @@
 version: 2.1
 # alias
 
+# orbs: https://circleci.com/docs/2.0/using-orbs/
+orbs:
+  codecov: codecov/codecov@1.0.5
+
 # executors (requires version: 2.1)
 executors:
   node8:
@@ -45,25 +49,18 @@ commands:
 jobs:
   build:
     executor: node10
-
     steps:
       - checkout
       - yarn_install
       - lerna_bootstrap
-      - lerna_build
-
-  test-node10:
-    executor: node10
-
-    steps:
-      - checkout
-      - yarn_install
-      - lerna_bootstrap
+      - lerna_lint
       - lerna_test
+      - lerna_build
+      - codecov/upload:
+          file: packages/yab-fetch/coverage/*.json
 
   test-node8:
     executor: node8
-
     steps:
       - checkout
       - yarn_install
@@ -77,4 +74,3 @@ workflows:
     jobs:
       - build
       - test-node8
-      - test-node10
