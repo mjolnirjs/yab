@@ -1,6 +1,6 @@
 English | [简体中文](./README.zh-CN.md)
 
-<p align="center"><img width="300" src="media/logo.png" alt="Vue logo" /></p>
+<p align="center"><img width="300" src="resource/logo.png" alt="logo" /></p>
 <div align="center">
 <p>Some tools for fetch.</p>
 <a href="https://circleci.com/gh/stonexer/yab/tree/master"><img src="https://circleci.com/gh/stonexer/yab/tree/master.svg?style=shield&circle-token=0386ba2e8d3d98f85b0c5e61977a8ded9cf95332" /></a>
@@ -40,8 +40,6 @@ This library can be used in the browser or on the server. A Fetch API polyfill m
 <details open>
 <summary><b>Basic Usage</summary>
 
-Create fetch instance.
-
 ```ts
 import { createFetch } from 'yab-fetch';
 
@@ -52,8 +50,6 @@ request.get('https://example.com');
 
 <details open>
 <summary><b>Middleware Usage</summary>
-
-Yab-fetch can use koa like middleware, here is an example of useing [yab-fetch-middleware-cache](./packages/yab-fetch-middleware-cache).
 
 ```ts
 import { createFetch } from 'yab-fetch';
