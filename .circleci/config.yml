@@ -23,11 +23,6 @@ commands:
       - run:
           name: Installing Dependencies
           command: yarn install --frozen-lockfile
-  lerna_bootstrap:
-    steps:
-      - run:
-          name: Lerna Bootstraping...
-          command: yarn run bootstrap
   lerna_lint:
     steps:
       - run:
@@ -52,7 +47,6 @@ jobs:
     steps:
       - checkout
       - yarn_install
-      - lerna_bootstrap
       - lerna_build
       - lerna_lint
       - lerna_test
@@ -64,7 +58,6 @@ jobs:
     steps:
       - checkout
       - yarn_install
-      - lerna_bootstrap
       - lerna_build
       - lerna_test
 
