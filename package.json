@@ -1,27 +1,26 @@
 {
-  "name": "root",
+  "name": "yab",
   "private": true,
-  "devDependencies": {
-    "lerna": "^3.15.0",
-    "lerna-changelog": "^0.8.2"
-  },
-  "scripts": {
-    "lerna": "lerna",
-    "bootstrap": "lerna bootstrap",
-    "changelog": "lerna-changelog",
-    "update": "lerna updated",
-    "publish": "lerna publish",
-    "lint": "lerna run lint",
-    "build": "lerna run build",
-    "test": "lerna run test"
-  },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stonexer/yab.git"
+    "url": "https://github.com/stonexer/yab"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/stonexer/yab"
+    "url": "https://github.com/stonexer/yab/issues"
   },
-  "homepage": "https://github.com/stonexer/yab#readme"
+  "homepage": "https://github.com/stonexer/yab#readme",
+  "scripts": {
+    "postinstall": "lerna clean --yes && lerna bootstrap",
+    "clean": "lerna run clean --parallel",
+    "changelog": "lerna-changelog",
+    "publish": "lerna publish",
+    "build": "lerna exec -- npm run build",
+    "lint": "lerna run lint",
+    "test": "lerna run test"
+  },
+  "devDependencies": {
+    "lerna": "^3.15.0",
+    "lerna-changelog": "^0.8.2"
+  }
 }
