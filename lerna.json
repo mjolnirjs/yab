@@ -1,6 +1,10 @@
 {
   "version": "0.0.0",
   "npmClient": "yarn",
+  "changelog": {
+    "repo": "stonexer/yab",
+    "cacheDir": ".changelog"
+  },
   "packages": [
     "packages/*"
   ]

@@ -1,6 +1,6 @@
 English | [简体中文](./README.zh-CN.md)
 
-<p align="center"><img width="300" src="resource/logo.png" alt="logo" /></p>
+<p align="center"><img width="300" src="resources/logo.png" alt="logo" /></p>
 <div align="center">
 <p>Some tools for fetch.</p>
 <a href="https://circleci.com/gh/stonexer/yab/tree/master"><img src="https://circleci.com/gh/stonexer/yab/tree/master.svg?style=shield&circle-token=0386ba2e8d3d98f85b0c5e61977a8ded9cf95332" /></a>
