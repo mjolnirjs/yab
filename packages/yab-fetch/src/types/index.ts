@@ -42,7 +42,7 @@ export interface YabFetcher<TFetchResult> {
     data?: unknown,
     config?: YabRequestInit
   ): Promise<TFetchResult>;
-  use(middleware: YabFetchMiddleware): void;
+  use(middleware: YabFetchMiddleware | YabFetchMiddleware[]): void;
 }
 
 export type MethodType = keyof typeof Method;

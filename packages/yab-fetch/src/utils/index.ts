@@ -6,19 +6,12 @@ import {
   ExecutableYabRequestInit
 } from '../types/index';
 
-export function appendURLParams(url: string, paramString: string): string {
-  return url + (url.includes('?') ? '&' : '?') + paramString;
+export function combineURL(left: string, right: string) {
+  return `${left.replace(/\/$/, '')}/${right.replace(/^\//, '')}`;
 }
 
-export function createURL(
-  url: string,
-  params?: Record<string, unknown>
-): string {
-  if (params == null) {
-    return url;
-  }
-
-  return appendURLParams(url, qs.stringify(params));
+export function appendURLParams(url: string, paramString: string): string {
+  return url + (url.includes('?') ? '&' : '?') + paramString;
 }
 
 export function isAbsoluteURL(url: string): boolean {
@@ -26,6 +19,19 @@ export function isAbsoluteURL(url: string): boolean {
   // RFC 3986 defines scheme name as a sequence of characters beginning with a letter and followed
   // by any combination of letters, digits, plus, period, or hyphen.
   return /^([a-z][a-z\d+\-.]*:)?\/\//i.test(url);
+}
+
+export function createURL(
+  init: Pick<ExecutableYabRequestInit, 'url' | 'baseURL' | 'params'>
+): string {
+  const fullURL =
+    isAbsoluteURL(init.url) || init.baseURL == null
+      ? init.url
+      : combineURL(init.baseURL, init.url);
+
+  return init.params == null
+    ? fullURL
+    : appendURLParams(fullURL, qs.stringify(init.params));
 }
 
 export function getYabRequestInit(
@@ -44,7 +50,7 @@ export function getYabRequestInit(
     headers
   });
 
-  const url = createURL(init.url, init.params);
+  const url = createURL(init);
 
   return { ...init, url };
 }

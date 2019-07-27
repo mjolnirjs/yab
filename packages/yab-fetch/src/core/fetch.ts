@@ -123,7 +123,7 @@ export class YabFetch {
   };
 }
 
-export function createFetch<TFetchResult>(
+export function createFetch<TFetchResult = IYabFetchContext>(
   requestInit?: YabRequestInit & {
     resolveData?(context: IYabFetchContext): Promise<TFetchResult>;
   }
