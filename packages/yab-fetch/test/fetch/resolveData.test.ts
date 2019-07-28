@@ -35,6 +35,81 @@ test('responseType json', async () => {
   expect(result).toEqual({ data: 'data' });
 });
 
+test('responseType text', async () => {
+  window.fetch = jest.fn(() =>
+    Promise.resolve(new Response('{"data":"data"}'))
+  );
+
+  const fetcher = createFetch<string>({
+    responseType: 'text'
+  });
+
+  const result = await fetcher('github.com');
+
+  expect(fetcher).toBeInstanceOf(Function);
+  expect(result).toEqual('{"data":"data"}');
+});
+
+test('responseType blob', async () => {
+  window.fetch = jest.fn(() =>
+    Promise.resolve(new Response('{"data":"data"}'))
+  );
+
+  const fetcher = createFetch<string>({
+    responseType: 'blob'
+  });
+
+  const result = await fetcher('github.com');
+
+  expect(fetcher).toBeInstanceOf(Function);
+  expect(result).toBeInstanceOf(Blob);
+});
+
+test('responseType arrayBuffer', async () => {
+  window.fetch = jest.fn(() =>
+    Promise.resolve(new Response('{"data":"data"}'))
+  );
+
+  const fetcher = createFetch<string>({
+    responseType: 'arrayBuffer'
+  });
+
+  const result = await fetcher('github.com');
+
+  expect(fetcher).toBeInstanceOf(Function);
+  expect(result).toBeInstanceOf(ArrayBuffer);
+});
+
+test('responseType formData', async () => {
+  window.fetch = jest.fn(() =>
+    Promise.resolve(new Response('{"data":"data"}'))
+  );
+
+  const fetcher = createFetch<string>({
+    responseType: 'formData'
+  });
+
+  const result = await fetcher('github.com');
+
+  expect(fetcher).toBeInstanceOf(Function);
+  expect(result).toBeInstanceOf(FormData);
+});
+
+test('responseType text', async () => {
+  window.fetch = jest.fn(() =>
+    Promise.resolve(new Response('{"data":"data"}'))
+  );
+
+  const fetcher = createFetch<string>({
+    responseType: 'text'
+  });
+
+  const result = await fetcher('github.com');
+
+  expect(fetcher).toBeInstanceOf(Function);
+  expect(result).toEqual('{"data":"data"}');
+});
+
 test('custom text resolveData', async () => {
   window.fetch = jest.fn(() =>
     Promise.resolve(new Response('{"data":"data"}'))

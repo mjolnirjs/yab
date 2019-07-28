@@ -42,11 +42,7 @@ export class YabFetch {
       throw context.error;
     }
 
-    if (yabRequestInit.resolveData) {
-      return yabRequestInit.resolveData(context);
-    }
-
-    return context;
+    return yabRequestInit.resolveData(context);
   };
 
   public use = (middleware: YabFetchMiddleware | YabFetchMiddleware[]) => {

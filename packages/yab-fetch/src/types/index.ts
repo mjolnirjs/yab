@@ -28,6 +28,7 @@ export interface YabRequestInit extends RequestInit {
 export interface ExecutableYabRequestInit extends YabRequestInit {
   url: string;
   responseType: ResponseType;
+  resolveData(context: IYabFetchContext): Promise<unknown>;
 }
 
 export interface YabFetcher<TFetchResult> {
