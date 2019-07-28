@@ -9,7 +9,7 @@ import {
 } from '../types/index';
 import { getYabRequestInit } from '../utils';
 import { YabFetchContext } from './context';
-import { DEFAULT_INIT } from '../defaults';
+import { DEFAULT_YAB_REQUEST_INIT } from '../defaults';
 import { createFetchMiddleware } from './fetchMiddleware';
 
 export class YabFetch {
@@ -24,7 +24,7 @@ export class YabFetch {
 
   public fetch = async (url: string, directOptions?: YabRequestInit) => {
     const yabRequestInit = getYabRequestInit(
-      { ...DEFAULT_INIT },
+      { ...DEFAULT_YAB_REQUEST_INIT },
       this._requestInit,
       directOptions,
       { url }

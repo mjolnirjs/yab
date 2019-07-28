@@ -30,7 +30,7 @@ export function resolveData(ctx: IYabFetchContext) {
   }
 }
 
-export const DEFAULT_INIT: YabRequestInit = {
+export const DEFAULT_YAB_REQUEST_INIT: YabRequestInit = {
   responseType: 'auto',
 
   resolveData,
