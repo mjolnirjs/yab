@@ -3,56 +3,65 @@
 A fetch library.
 
 ## Table of Content
-- [Introduction](#introduction)
+
 - [Features](#features)
 - [Browser Support](#browser-support)
 - [Install](#install)
+  - [npm](#npm)
+  - [yarn](#yarn)
+  - [CDN](#cdn)
 - [Useage](#useage)
-  - [Basic](#basic)
-- [API](#api)
-- [TypeScript](#typescript)
+  - [createFetch(url[, options])](#createfetchurl-options)
+  - [Instance methods](#instance-methods)
+  - [Middleware](#middleware)
+    - [yab.use(middleware)](#yabusemiddleware)
+    - [middleware function](#middleware-function)
+- [Type usage with TypeScript](#type-usage-with-typescript)
 - [Liscense](#liscense)
-
-## Introduction
 
 ## Features
 
-- xxxx
-- yyyy
-- zzzz
+- **Middleware**: [koa](https://koajs.com/)-like middleware.
+- **Fetch**: base on browser [fetch](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch) API.
+- **TypeScript**: Everything in Typescript.
 
 ## Browser Support
-You will also need to provide your own polyfill for the fetch API if you're working in older browsers.
 
-whatwg-fetch is recommended. so-fetch does not provide a fetch polyfill.
+This library can only be used in modern browser environment. [Polyfill](https://github.com/github/fetch) may be needed.
 
 ## Install
-**npm**:
-`npm install yab-fetch --save`
 
-**yarn**:
-`yarn add yab-fetch --save`
+### npm
 
-**CDN**:
+`npm install yab-fetch`
+
+### yarn
+
+`yarn add yab-fetch`
+
+### CDN
+
 ```html
-<script src="xxx"></script>
+<script src="https://unpkg.com/yab-fetch.min.js"></script>
 ```
 
 ## Useage
 
-### instance
-
 ### createFetch(url[, options])
+
 options:
 
 ```js
 {
   baseUrl: '', // base url
-  data: {},
+  data: {}, // post data
   use: [], // middlewares
+  resolveData: (ctx) => {} // resolve data from ctx
+  responseType: 'json'|'text'| 'arrayBuffer' | 'blob' // auto resolve
+  before: (request) => {} // handle request before fetch
+  after: (response) => {} // handle response after fetch
 }
 ```
-
 
 ### Instance methods
 
@@ -65,20 +74,22 @@ instace.post(url[, options]); // HTTP POST
 ```
 
 ### Middleware
+
 #### yab.use(middleware)
+
 ```ts
 import { createFetch } from 'yab-fetch';
 const instance = createFetch();
 
-instance.use(async (ctx, next)=> {
+instance.use(async (ctx, next) => {
   await next();
-})
+});
 ```
 
 #### middleware function
 
-
 ## Type usage with TypeScript
+
 This module is written in TypeScript and the types are published to npm;
 
 ## Liscense

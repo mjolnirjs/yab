@@ -1,5 +1,3 @@
-English | [简体中文](./README.zh-CN.md)
-
 <p align="center"><img width="300" src="resources/logo.png" alt="logo" /></p>
 <div align="center">
 <p>A simple fetch library.</p>
@@ -42,7 +40,7 @@ This library can only be used in modern browser environment. [Polyfill](https://
 ## Useage
 
 <details open>
-<summary><b>Basic Usage</summary>
+<summary><b>Basic Usage</b></summary>
 
 ```ts
 import { createFetch } from "yab-fetch";
@@ -54,14 +52,14 @@ request.get("https://example.com");
 </details>
 
 <details open>
-<summary><b>Middleware Usage</summary>
+<summary><b>Middleware Usage</b></summary>
 
 ```ts
 import { createFetch } from "yab-fetch";
-import { createCacheMiddleware } from "yab-fetch-middleware-cache";
+import { createCache } from "yab-fetch-cache";
 
 const request = createFetch();
-request.use(createCacheMiddleware());
+request.use(createCache());
 
 request.get("https://example.com");
 ```
@@ -79,7 +77,7 @@ This repository is a monorepo that we manage using Lerna. That means that we act
 | Package                                                              | Version                                                                                                         | Description                                              |
 | -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------- |
 | [`yab-fetch`](/packages/yab-fetch)                                   | [![npm](https://img.shields.io/npm/v/yab-fetch.svg?style=flat-square)](https://www.npmjs.com/package/yab-fetch) | The fetch library.                                       |
-| [`yab-fetch-middleware-cache`](/packages/yab-fetch-middleware-cache) | [![npm](https://img.shields.io/npm/v/yab-fetch.svg?style=flat-square)](https://www.npmjs.com/package/yab-fetch) | A yab middleware, fouse on cache response using IndexDB. |
+| [`yab-fetch-cache`](/packages/yab-fetch-cache) | [![npm](https://img.shields.io/npm/v/yab-fetch-cache.svg?style=flat-square)](https://www.npmjs.com/package/yab-fetch-cache) | A yab middleware, focus on cache response using IndexDB. |
 
 ## Changelog
 

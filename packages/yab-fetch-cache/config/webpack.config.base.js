@@ -2,7 +2,7 @@ const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 const { resolve } = require('./utils');
-const projectName = 'yab-fetch-middlewares';
+const projectName = 'yab-fetch-cache';
 
 module.exports = {
   entry: {

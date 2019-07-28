@@ -1,8 +1,8 @@
 {
-  "name": "yab-fetch-middlewares",
+  "name": "yab-fetch-cache",
   "version": "0.0.1-alpha.0",
   "description": "",
-  "homepage": "https://github.com/stonexer/yab/tree/master/packages/yab-fetch-middlewares#readme",
+  "homepage": "https://github.com/stonexer/yab/tree/master/packages/yab-fetch-cache#readme",
   "license": "ISC",
   "repository": {
     "type": "git",
