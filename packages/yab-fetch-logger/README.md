@@ -5,6 +5,8 @@
 `npm i yab-fetch-logger`
 
 ## Useage
+> **must be the last middleware in chain.**
+
 
 ```ts
 import { createFetch } from 'yab-fetch';
