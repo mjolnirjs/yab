@@ -1,8 +1,8 @@
 <p align="center"><img width="300" src="resources/logo.png" alt="logo" /></p>
 <div align="center">
 <p>A simple fetch library.</p>
-<a href="https://circleci.com/gh/mjolnirjs/yab/tree/master"><img src="https://circleci.com/gh/mjolnirjs/yab/tree/master.svg?style=shield&circle-token=0386ba2e8d3d98f85b0c5e61977a8ded9cf95332" /></a>
-<a href="https://codecov.io/gh/mjolnirjs/yab"><img src="https://codecov.io/gh/mjolnirjs/yab/branch/master/graph/badge.svg?token=d1CXXZJLby" /></a>
+<a href="https://circleci.com/gh/mjolnirjs/yab/tree/master"><img src="https://circleci.com/gh/mjolnirjs/yab/tree/master.svg?style=shield" /></a>
+<a href="https://codecov.io/gh/mjolnirjs/yab"><img src="https://codecov.io/gh/mjolnirjs/yab/branch/master/graph/badge.svg" /></a>
 </div>
 
 ---
