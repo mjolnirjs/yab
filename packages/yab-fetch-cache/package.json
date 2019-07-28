@@ -1,6 +1,6 @@
 {
   "name": "yab-fetch-cache",
-  "version": "0.0.1-alpha.0",
+  "version": "0.0.1-alpha.1",
   "description": "",
   "homepage": "https://github.com/mjolnirjs/yab/tree/master/packages/yab-fetch-cache#readme",
   "license": "ISC",
@@ -49,7 +49,7 @@
     "webpack-cli": "^3.3.2",
     "webpack-merge": "^4.2.1",
     "whatwg-fetch": "^3.0.0",
-    "yab-fetch": "^0.0.1-alpha.0"
+    "yab-fetch": "^0.0.1-alpha.1"
   },
   "files": [
     "dist"
