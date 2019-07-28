@@ -4,22 +4,30 @@ export type RequestHeaders = Record<string, string> | undefined;
 
 export type RequestParams = Record<string, string> | undefined;
 
+export type ResponseType =
+  | 'auto'
+  | 'json'
+  | 'text'
+  | 'arrayBuffer'
+  | 'blob'
+  | 'formData';
+
 export interface YabRequestInit extends RequestInit {
   baseURL?: string;
   params?: RequestParams;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data?: any;
   url?: string;
-  contentType?: 'auto' | 'json' | 'text';
+  responseType?: ResponseType;
   resolveData?(context: IYabFetchContext): Promise<unknown>;
-  validateResponseStatus?(status: Response['status']): boolean;
+  validateResponseStatus?(response: Response): boolean;
   before?(requestInit: RequestInit): RequestInit;
   after?(response: Response): Response;
 }
 
 export interface ExecutableYabRequestInit extends YabRequestInit {
   url: string;
-  contentType: 'json' | 'text' | 'auto';
+  responseType: ResponseType;
 }
 
 export interface YabFetcher<TFetchResult> {
@@ -57,6 +65,9 @@ export interface IYabFetchContext {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   json?: any;
   text?: string;
+  blob?: Blob;
+  arrayBuffer?: ArrayBuffer;
+  formData?: FormData;
 
   // **Error**
   error: YabFetchError | undefined;

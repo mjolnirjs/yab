@@ -32,10 +32,10 @@ test('get/set context inside middleware', async () => {
 
     context.yabRequestInit = {
       ...context.yabRequestInit,
-      contentType: 'json'
+      responseType: 'json'
     };
 
-    expect(context.yabRequestInit.contentType).toEqual('json');
+    expect(context.yabRequestInit.responseType).toEqual('json');
 
     await next();
 

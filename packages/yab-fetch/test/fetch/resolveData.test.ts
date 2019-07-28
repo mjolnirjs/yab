@@ -20,13 +20,28 @@ test('auto json resolveData', async () => {
   expect(result).toEqual({ data: 'data' });
 });
 
+test('responseType json', async () => {
+  window.fetch = jest.fn(() =>
+    Promise.resolve(new Response('{"data":"data"}'))
+  );
+
+  const fetcher = createFetch<{ data: string }>({
+    responseType: 'json'
+  });
+
+  const result = await fetcher('github.com');
+
+  expect(fetcher).toBeInstanceOf(Function);
+  expect(result).toEqual({ data: 'data' });
+});
+
 test('custom text resolveData', async () => {
   window.fetch = jest.fn(() =>
     Promise.resolve(new Response('{"data":"data"}'))
   );
 
   const fetcher = createFetch<string>({
-    contentType: 'text',
+    responseType: 'text',
     resolveData: async (context: IYabFetchContext) => {
       return context.text as string;
     }
