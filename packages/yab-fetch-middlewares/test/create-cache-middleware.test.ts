@@ -70,7 +70,11 @@ describe('Cache Middleware', () => {
     const cacheMiddleware = createCacheMiddleware({ strategy: 'always' });
     const fakeNext = jest.fn();
     const fakeCtx: IYabFetchContext = {
-      yabRequestInit: { url, responseType: 'json' },
+      yabRequestInit: {
+        url,
+        responseType: 'json',
+        resolveData: (ctx) => ctx.json
+      },
       response: new Response(),
       error: undefined
     };
@@ -85,7 +89,11 @@ describe('Cache Middleware', () => {
     const cacheMiddleware = createCacheMiddleware({ strategy: 'fallback' });
     const fakeNext = jest.fn();
     const fakeCtx: IYabFetchContext = {
-      yabRequestInit: { url, responseType: 'json' },
+      yabRequestInit: {
+        url,
+        responseType: 'json',
+        resolveData: (ctx) => ctx.json
+      },
       response: new Response('{"id":"3"}'),
       json: { id: 3 },
       error: undefined
@@ -105,7 +113,11 @@ describe('Cache Middleware', () => {
       throw new Error('fetch error');
     });
     const fakeCtx: IYabFetchContext = {
-      yabRequestInit: { url, responseType: 'json' },
+      yabRequestInit: {
+        url,
+        responseType: 'json',
+        resolveData: (ctx) => ctx.json
+      },
       response: new Response(),
       error: undefined
     };
@@ -123,7 +135,11 @@ describe('Cache Middleware', () => {
       throw fakeError;
     });
     const fakeCtx: IYabFetchContext = {
-      yabRequestInit: { url: '/react', responseType: 'json' },
+      yabRequestInit: {
+        url: '/react',
+        responseType: 'json',
+        resolveData: (ctx) => ctx.json
+      },
       response: new Response(),
       error: undefined
     };
