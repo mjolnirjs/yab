@@ -2,7 +2,7 @@
   "version": "0.0.1-alpha.0",
   "npmClient": "yarn",
   "changelog": {
-    "repo": "stonexer/yab",
+    "repo": "mjolnirjs/yab",
     "cacheDir": ".changelog"
   },
   "packages": [

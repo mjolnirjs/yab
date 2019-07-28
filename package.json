@@ -3,13 +3,13 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/stonexer/yab"
+    "url": "https://github.com/mjolnirjs/yab"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/stonexer/yab/issues"
+    "url": "https://github.com/mjolnirjs/yab/issues"
   },
-  "homepage": "https://github.com/stonexer/yab#readme",
+  "homepage": "https://github.com/mjolnirjs/yab#readme",
   "scripts": {
     "postinstall": "lerna clean --yes && lerna bootstrap",
     "clean": "lerna run clean --parallel",

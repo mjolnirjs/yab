@@ -17,11 +17,11 @@
   "types": "./dist/types/index.d.ts",
   "repository": {
     "type": "git",
-    "url": "https://github.com/stonexer/yab/tree/master/packages/yab-fetch"
+    "url": "https://github.com/mjolnirjs/yab/tree/master/packages/yab-fetch"
   },
-  "homepage": "https://github.com/stonexer/yab/tree/master/packages/yab-fetch",
+  "homepage": "https://github.com/mjolnirjs/yab/tree/master/packages/yab-fetch",
   "bugs": {
-    "url": "https://github.com/stonexer/yab/issues"
+    "url": "https://github.com/mjolnirjs/yab/issues"
   },
   "license": "MIT",
   "publishConfig": {

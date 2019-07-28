@@ -2,11 +2,11 @@
   "name": "yab-fetch-cache",
   "version": "0.0.1-alpha.0",
   "description": "",
-  "homepage": "https://github.com/stonexer/yab/tree/master/packages/yab-fetch-cache#readme",
+  "homepage": "https://github.com/mjolnirjs/yab/tree/master/packages/yab-fetch-cache#readme",
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stonexer/yab.git"
+    "url": "git+https://github.com/mjolnirjs/yab.git"
   },
   "scripts": {
     "clean": "rimraf dist",
@@ -55,6 +55,6 @@
     "dist"
   ],
   "bugs": {
-    "url": "https://github.com/stonexer/yab/issues"
+    "url": "https://github.com/mjolnirjs/yab/issues"
   }
 }
