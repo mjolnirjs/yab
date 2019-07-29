@@ -14,10 +14,11 @@
     "postinstall": "lerna clean --yes && lerna bootstrap",
     "clean": "lerna run clean --parallel",
     "changelog": "lerna-changelog",
-    "publish": "lerna publish",
     "build": "lerna exec -- npm run build",
     "lint": "lerna run lint",
-    "test": "lerna run test"
+    "test": "lerna run test",
+    "publish": "lerna publish",
+    "release": "npm run test && npm run build && npm run publish"
   },
   "devDependencies": {
     "lerna": "^3.15.0",
