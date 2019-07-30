@@ -19,7 +19,7 @@ Yab is a high-level HTTP client based on Fetch API and `koa-like` middlewares.
 
 ## Browser Support
 
-This library can only be used in modern browser environment. [Polyfill](https://github.com/github/fetch) may be needed.
+This library can only be used in [modern browser environment](https://caniuse.com/#search=fetch). [Polyfill](https://github.com/github/fetch) may be needed.
 
 ## Install
 
@@ -34,7 +34,7 @@ This library can only be used in modern browser environment. [Polyfill](https://
 ### CDN
 
 ```html
-<script src="https://unpkg.com/yab-fetch.min.js"></script>
+<script src="https://unpkg.com/yab-fetch/dist/yab-fetch.min.js"></script>
 ```
 
 ## Useage
