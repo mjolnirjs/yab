@@ -5,15 +5,7 @@ const { resolve } = require('./utils');
 const projectName = 'yab-fetch-logger';
 
 module.exports = {
-  entry: {
-    [`${projectName}.min`]: [resolve('src')] // same as resolve('src/index.js');
-  },
-  output: {
-    filename: '[name].js',
-    path: resolve('dist'),
-    library: projectName,
-    libraryTarget: 'umd'
-  },
+  entry: resolve('src'),
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json']
   },

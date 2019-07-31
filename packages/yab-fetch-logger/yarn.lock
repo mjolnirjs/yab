@@ -343,6 +343,18 @@
     "@types/istanbul-lib-coverage" "*"
     "@types/istanbul-lib-report" "*"
 
+"@types/jest-diff@*":
+  version "20.0.1"
+  resolved "https://registry.yarnpkg.com/@types/jest-diff/-/jest-diff-20.0.1.tgz#35cc15b9c4f30a18ef21852e255fdb02f6d59b89"
+  integrity sha512-yALhelO3i0hqZwhjtcr6dYyaLoCHbAMshwtj6cGxTvHZAKXHsYGdff6E8EPw3xLKY0ELUTQ69Q1rQiJENnccMA==
+
+"@types/jest@^24.0.16":
+  version "24.0.16"
+  resolved "https://registry.yarnpkg.com/@types/jest/-/jest-24.0.16.tgz#8d3e406ec0f0dc1688d6711af3062ff9bd428066"
+  integrity sha512-JrAiyV+PPGKZzw6uxbI761cHZ0G7QMOHXPhtSpcl08rZH6CswXaaejckn3goFKmF7M3nzEoJ0lwYCbqLMmjziQ==
+  dependencies:
+    "@types/jest-diff" "*"
+
 "@types/json-schema@^7.0.3":
   version "7.0.3"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.3.tgz#bdfd69d61e464dcc81b25159c270d75a73c1a636"
@@ -5761,10 +5773,10 @@ xtend@^4.0.0, xtend@~4.0.1:
   resolved "https://registry.yarnpkg.com/y18n/-/y18n-4.0.0.tgz#95ef94f85ecc81d007c264e190a120f0a3c8566b"
   integrity sha512-r9S/ZyXu/Xu9q1tYlpsLIsa3EeLXXk0VwlxqTcFRfg9EhMW+17kbt9G0NrgCmhGb5vT2hyhJZLfDGx+7+5Uj/w==
 
-yab-fetch@^0.0.1-alpha.1:
-  version "0.0.1-alpha.1"
-  resolved "https://registry.yarnpkg.com/yab-fetch/-/yab-fetch-0.0.1-alpha.1.tgz#9957a01f21d1d2089df8be12b31a0f49f6f4c308"
-  integrity sha512-eb984eOVljHCdCnQRwnHurAkB2qyvHHE/wGLAzj1xL6qx0MZTPGVFjjzXvF5B45a26EpBjCGa/YBlPUIvgX/BA==
+yab-fetch@^0.0.1-alpha.3:
+  version "0.0.1-alpha.3"
+  resolved "https://registry.yarnpkg.com/yab-fetch/-/yab-fetch-0.0.1-alpha.3.tgz#293198f4178e42c296677169208820a2d7a39670"
+  integrity sha512-Fmnkoegz9uRRf/X0/mMZ19tCG8m2OmpMKvmafxPRmvFdcRlKFO+ptsz87UR9BQ9qPSR5Nl3IPmcDh3VMS/ZyhA==
   dependencies:
     koa-compose "^4.1.0"
     lodash.omit "^4.5.0"

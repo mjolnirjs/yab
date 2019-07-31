@@ -10,16 +10,20 @@
   },
   "scripts": {
     "clean": "rimraf dist",
-    "build": "npm run clean && npm run build:es && npm run build:lib && npm run build:dist",
+    "dev": "tsc -w -p ./tsconfig.es.json",
+    "build": "npm run clean && npm run build:es && npm run build:lib && npm run build:umd && npm run build:umd-min",
     "build:es": "tsc -p ./tsconfig.es.json",
     "build:lib": "tsc -p ./tsconfig.lib.json",
-    "build:dist": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.dist.js",
-    "lint": "eslint src --ext ts"
+    "build:umd": "cross-env NODE_ENV=development webpack --config config/webpack.config.dev.js",
+    "build:umd-min": "cross-env NODE_ENV=production webpack --config ./config/webpack.config.dist.js",
+    "lint": "eslint src --ext ts",
+    "test": "jest"
   },
   "main": "./dist/lib/index.js",
   "module": "./dist/es/index.js",
   "types": "./dist/types/index.d.ts",
   "devDependencies": {
+    "@types/jest": "^24.0.16",
     "@typescript-eslint/eslint-plugin": "^1.9.0",
     "@typescript-eslint/parser": "^1.9.0",
     "cache-loader": "^3.0.1",

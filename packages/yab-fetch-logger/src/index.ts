@@ -4,6 +4,11 @@ import { Options, Logger } from './type';
 import { logBeforeFetch, logAfterFetch, logError } from './logHelper';
 
 export const createLogger = (options?: Options): YabFetchMiddleware => {
+  /* istanbul ignore if */
+  if (process.env.NODE_ENV !== 'production') {
+    console.warn('[yab-logger]: warning.');
+  }
+
   const { collapsed = true } = options || {};
 
   const { log, error, groupCollapsed, group, groupEnd } = console;
