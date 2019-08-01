@@ -31,7 +31,7 @@ export function resolveData(ctx: IYabFetchContext) {
 }
 
 export const DEFAULT_YAB_REQUEST_INIT: YabRequestInit = {
-  responseType: 'auto',
+  responseType: 'json',
 
   resolveData,
   validateResponseStatus

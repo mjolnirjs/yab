@@ -151,7 +151,7 @@ test('custom before & after', async () => {
     'github.com',
     { method: 'post', cache: 'force-cache' }
   ]);
-  expect(result.json).toEqual({ data: 1 });
+  expect(result).toEqual({ data: 1 });
 });
 
 test('custom json resolveData', async () => {
