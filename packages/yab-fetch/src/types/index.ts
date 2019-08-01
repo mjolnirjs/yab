@@ -59,6 +59,7 @@ export type MethodType = keyof typeof Method;
 export interface IYabFetchContext {
   // **Request**
   yabRequestInit: ExecutableYabRequestInit;
+  requestInit: RequestInit;
 
   // **Response**
   response: Response;
@@ -86,7 +87,7 @@ export interface YabFetchErrorOptions {
   error?: Error;
   errorMessage?: string;
   yabRequestInit: ExecutableYabRequestInit;
-  requestInit: RequestInit;
+  requestInit?: RequestInit;
   response?: Response;
 }
 
