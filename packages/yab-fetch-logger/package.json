@@ -10,7 +10,7 @@
   },
   "scripts": {
     "clean": "rimraf dist",
-    "dev": "tsc -w -p ./tsconfig.es.json",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --config config/webpack.config.playground.js --hot",
     "build": "npm run clean && npm run build:es && npm run build:lib && npm run build:umd && npm run build:umd-min",
     "build:es": "tsc -p ./tsconfig.es.json",
     "build:lib": "tsc -p ./tsconfig.lib.json",
@@ -38,6 +38,7 @@
     "fork-ts-checker-notifier-webpack-plugin": "^1.0.0",
     "fork-ts-checker-webpack-plugin": "^1.3.4",
     "friendly-errors-webpack-plugin": "^1.7.0",
+    "html-webpack-plugin": "^3.2.0",
     "jest": "^24.8.0",
     "prettier": "^1.17.1",
     "rimraf": "^2.6.3",
@@ -47,6 +48,7 @@
     "typescript": "^3.5.2",
     "webpack": "^4.32.2",
     "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.7.2",
     "webpack-merge": "^4.2.1",
     "whatwg-fetch": "^3.0.0",
     "yab-fetch": "^0.0.1-alpha.3"
