@@ -70,6 +70,7 @@ describe('Cache Middleware', () => {
     const cacheMiddleware = createCacheMiddleware({ strategy: 'always' });
     const fakeNext = jest.fn();
     const fakeCtx: IYabFetchContext = {
+      requestInit: {},
       yabRequestInit: {
         url,
         responseType: 'json',
@@ -89,6 +90,7 @@ describe('Cache Middleware', () => {
     const cacheMiddleware = createCacheMiddleware({ strategy: 'fallback' });
     const fakeNext = jest.fn();
     const fakeCtx: IYabFetchContext = {
+      requestInit: {},
       yabRequestInit: {
         url,
         responseType: 'json',
@@ -113,6 +115,7 @@ describe('Cache Middleware', () => {
       throw new Error('fetch error');
     });
     const fakeCtx: IYabFetchContext = {
+      requestInit: {},
       yabRequestInit: {
         url,
         responseType: 'json',
@@ -135,6 +138,7 @@ describe('Cache Middleware', () => {
       throw fakeError;
     });
     const fakeCtx: IYabFetchContext = {
+      requestInit: {},
       yabRequestInit: {
         url: '/react',
         responseType: 'json',
