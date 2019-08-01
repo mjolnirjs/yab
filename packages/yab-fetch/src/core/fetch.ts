@@ -38,10 +38,6 @@ export class YabFetch {
 
     await callback(context);
 
-    if (context.error) {
-      throw context.error;
-    }
-
     return yabRequestInit.resolveData(context);
   };
 

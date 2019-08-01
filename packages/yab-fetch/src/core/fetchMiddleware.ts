@@ -48,10 +48,10 @@ export function createFetchMiddleware(
     try {
       // generate native fetch request init
       let requestInit = getRequestInit(yabRequestInit);
-
       if (yabRequestInit.before) {
         requestInit = yabRequestInit.before(requestInit);
       }
+      ctx.requestInit = requestInit;
 
       // fetch
       let response;
@@ -62,6 +62,8 @@ export function createFetchMiddleware(
         if (yabRequestInit.after) {
           response = yabRequestInit.after(response);
         }
+
+        ctx.response = response;
       } catch (nativefetchError) {
         throw createError({
           error: nativefetchError,
@@ -69,8 +71,6 @@ export function createFetchMiddleware(
           requestInit
         });
       }
-
-      ctx.response = response;
 
       // invalid response status
       if (
@@ -83,11 +83,11 @@ export function createFetchMiddleware(
           requestInit,
           response
         });
-      } else {
-        await settleResponse(ctx);
       }
+
+      await settleResponse(ctx);
     } catch (error) {
-      ctx.error = error;
+      throw error;
     }
   };
 }
