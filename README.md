@@ -37,7 +37,7 @@ This library can only be used in [modern browser environments](https://caniuse.c
 <script src="https://unpkg.com/yab-fetch/dist/yab-fetch.min.js"></script>
 ```
 
-## Useage
+## Usage
 
 <details open>
 <summary><b>Basic Usage</b></summary>
