@@ -1,6 +1,6 @@
 import 'whatwg-fetch';
 
-import { createFetch } from '../../src/core/fetch';
+import { createYab } from '../../src/core/fetch';
 import { IYabFetchContext } from '../../src/types';
 
 test('resolve: json', async () => {
@@ -8,13 +8,13 @@ test('resolve: json', async () => {
     Promise.resolve(new Response('{"data":"data"}'))
   );
 
-  const fetcher = createFetch({
+  const fetcher = createYab({
     resolveData: async (context: IYabFetchContext) => {
       return context.json;
     }
   });
 
-  const result = await fetcher('github.com');
+  const result = await fetcher.get('github.com');
 
   expect(result).toEqual({ data: 'data' });
 });
@@ -24,7 +24,7 @@ test('get/set context inside middleware', async () => {
     Promise.resolve(new Response('{"data":"data"}'))
   );
 
-  const fetcher = createFetch();
+  const fetcher = createYab();
 
   fetcher.use(async (context, next) => {
     expect(context.yabRequestInit).toBeDefined();
@@ -45,7 +45,7 @@ test('get/set context inside middleware', async () => {
     expect(context.success).toEqual(true);
   });
 
-  await fetcher('github.com');
+  await fetcher.get('github.com');
 });
 
 test('response is not ready exception', async () => {
@@ -53,7 +53,7 @@ test('response is not ready exception', async () => {
     Promise.resolve(new Response('{"data":"data"}'))
   );
 
-  const fetcher = createFetch({
+  const fetcher = createYab({
     resolveData: async (context: IYabFetchContext) => {
       return context.json;
     }
@@ -65,7 +65,7 @@ test('response is not ready exception', async () => {
   });
 
   try {
-    await fetcher('github.com');
+    await fetcher.get('github.com');
   } catch (err) {
     expect(err.message).toEqual('Response is not ready');
   }
@@ -76,7 +76,7 @@ test('middleware: json', async () => {
     Promise.resolve(new Response('{"data":"data"}'))
   );
 
-  const fetcher = createFetch({
+  const fetcher = createYab({
     resolveData: async (context: IYabFetchContext) => {
       return context.json;
     }
@@ -87,7 +87,7 @@ test('middleware: json', async () => {
     context.json = await context.response.json();
   });
 
-  const result = await fetcher('github.com');
+  const result = await fetcher.get('github.com');
 
   expect(result).toEqual({ data: 'data' });
 });
@@ -97,7 +97,7 @@ test('middleware: data', async () => {
     Promise.resolve(new Response('{"data":"data"}'))
   );
 
-  const fetcher = createFetch({
+  const fetcher = createYab({
     async resolveData(context: IYabFetchContext) {
       return context.data;
     }
@@ -109,7 +109,7 @@ test('middleware: data', async () => {
     context.data = json.data;
   });
 
-  const result = await fetcher('github.com');
+  const result = await fetcher.get('github.com');
 
   expect(result).toEqual('data');
 });
