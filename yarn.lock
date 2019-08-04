@@ -2835,7 +2835,7 @@ lcid@^2.0.0:
   dependencies:
     invert-kv "^2.0.0"
 
-lerna-changelog@^0.8.2:
+lerna-changelog@0.8.2:
   version "0.8.2"
   resolved "https://registry.yarnpkg.com/lerna-changelog/-/lerna-changelog-0.8.2.tgz#05dc24add91741a4c198a79f82a1a4ac3fbb4754"
   integrity sha512-GrWs8K3DrPpO1sUrcloYp9ioj+PNAX27U6tM0+10fhbNzBB7h4HS+4N5DWKhEQRDoJjZh1QA+wWwTpDNJdJHyA==
@@ -2850,10 +2850,10 @@ lerna-changelog@^0.8.2:
     string.prototype.padend "^3.0.0"
     yargs "^11.0.0"
 
-lerna@^3.15.0:
+lerna@3.16.4:
   version "3.16.4"
-  resolved "https://registry.npm.taobao.org/lerna/download/lerna-3.16.4.tgz#158cb4f478b680f46f871d5891f531f3a2cb31ec"
-  integrity sha1-FYy09Hi2gPRvhx1YkfUx86LLMew=
+  resolved "https://registry.yarnpkg.com/lerna/-/lerna-3.16.4.tgz#158cb4f478b680f46f871d5891f531f3a2cb31ec"
+  integrity sha512-0HfwXIkqe72lBLZcNO9NMRfylh5Ng1l8tETgYQ260ZdHRbPuaLKE3Wqnd2YYRRkWfwPyEyZO8mZweBR+slVe1A==
   dependencies:
     "@lerna/add" "3.16.2"
     "@lerna/bootstrap" "3.16.2"

@@ -21,7 +21,7 @@
     "release": "npm run test && npm run build && npm run publish"
   },
   "devDependencies": {
-    "lerna": "^3.15.0",
-    "lerna-changelog": "^0.8.2"
+    "lerna": "3.16.4",
+    "lerna-changelog": "0.8.2"
   }
 }
