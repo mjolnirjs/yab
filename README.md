@@ -46,6 +46,7 @@ This library can only be used in [modern browser environments](https://caniuse.c
 import { createFetch } from "yab-fetch";
 
 const request = createFetch();
+
 request.get("https://example.com");
 ```
 
@@ -59,6 +60,7 @@ import { createFetch } from "yab-fetch";
 import { createCache } from "yab-fetch-cache";
 
 const request = createFetch();
+
 request.use(createCache());
 
 request.get("https://example.com");
