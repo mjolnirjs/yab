@@ -58,3 +58,8 @@ jspm_packages/
 /packages/*/node_modules
 
 .changelog
+
+
+/packages/*/dist/
+/packages/*/coverage/
+/packages/*/node_modules/

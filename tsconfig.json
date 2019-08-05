@@ -1,6 +1,5 @@
 {
   "compilerOptions": {
-    "rootDir": "src",
     "module": "es6",
     "target": "es5",
     "lib": ["es2018", "esnext", "dom"],
