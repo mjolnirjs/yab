@@ -5,8 +5,5 @@
   "changelog": {
     "repo": "mjolnirjs/yab",
     "cacheDir": ".changelog"
-  },
-  "packages": [
-    "packages/*"
-  ]
+  }
 }
