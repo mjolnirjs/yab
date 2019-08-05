@@ -1,6 +1,9 @@
 {
   "name": "yab",
   "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/mjolnirjs/yab"
