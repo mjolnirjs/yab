@@ -65,3 +65,42 @@ test('fetcher.post', () => {
     { method: 'post' }
   ]);
 });
+
+test('fetcher.put', () => {
+  window.fetch = jest.fn(() => Promise.resolve(new Response('{}')));
+
+  const fetcher = createYab();
+
+  fetcher.put('github.com');
+
+  expect((window.fetch as any).mock.calls[0]).toEqual([
+    'github.com',
+    { method: 'put' }
+  ]);
+});
+
+test('fetcher.patch', () => {
+  window.fetch = jest.fn(() => Promise.resolve(new Response('{}')));
+
+  const fetcher = createYab();
+
+  fetcher.patch('github.com');
+
+  expect((window.fetch as any).mock.calls[0]).toEqual([
+    'github.com',
+    { method: 'patch' }
+  ]);
+});
+
+test('fetcher.head', () => {
+  window.fetch = jest.fn(() => Promise.resolve(new Response('{}')));
+
+  const fetcher = createYab();
+
+  fetcher.head('github.com');
+
+  expect((window.fetch as any).mock.calls[0]).toEqual([
+    'github.com',
+    { method: 'head' }
+  ]);
+});

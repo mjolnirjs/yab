@@ -19,6 +19,20 @@ test('auto json resolveData', async () => {
   expect(result).toEqual({ data: 'data' });
 });
 
+test('responseType auto', async () => {
+  window.fetch = jest.fn(() =>
+    Promise.resolve(new Response('{"data":"data"}'))
+  );
+
+  const fetcher = createYab({
+    responseType: 'auto'
+  });
+
+  const result = await fetcher.get<{ json: any }>('github.com');
+
+  expect(result.json).toEqual({ data: 'data' });
+});
+
 test('responseType json', async () => {
   window.fetch = jest.fn(() =>
     Promise.resolve(new Response('{"data":"data"}'))

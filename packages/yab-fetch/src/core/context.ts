@@ -49,14 +49,6 @@ export class YabFetchContext implements IYabFetchContext {
     this._response = response;
   }
 
-  public get error() {
-    return this._error;
-  }
-
-  public set error(error: YabFetchError | undefined) {
-    this._error = error;
-  }
-
   public throw(message: string) {
     throw createError({
       errorMessage: message,

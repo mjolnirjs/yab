@@ -39,6 +39,8 @@ test('get/set context inside middleware', async () => {
 
     await next();
 
+    expect(context.requestInit).toBeDefined();
+    expect(context.requestInit.method).toEqual('get');
     expect(context.json).toEqual({ data: 'data' });
 
     context.success = true;
@@ -46,6 +48,52 @@ test('get/set context inside middleware', async () => {
   });
 
   await fetcher.get('github.com');
+});
+
+test('requestInit is not ready exception', async () => {
+  window.fetch = jest.fn(() =>
+    Promise.resolve(new Response('{"data":"data"}'))
+  );
+
+  const fetcher = createYab({
+    resolveData: async (context: IYabFetchContext) => {
+      return context.json;
+    }
+  });
+
+  fetcher.use(async (context, next) => {
+    context.requestInit = context.requestInit;
+    await next();
+  });
+
+  try {
+    await fetcher.get('github.com');
+  } catch (err) {
+    expect(err.message).toEqual('RequestInit is not ready');
+  }
+});
+
+test('ctx.throw', async () => {
+  window.fetch = jest.fn(() =>
+    Promise.resolve(new Response('{"data":"data"}'))
+  );
+
+  const fetcher = createYab({
+    resolveData: async (context: IYabFetchContext) => {
+      return context.json;
+    }
+  });
+
+  fetcher.use(async (context, next) => {
+    await next();
+    context.throw('Middleware throw an error');
+  });
+
+  try {
+    await fetcher.get('github.com');
+  } catch (err) {
+    expect(err.message).toEqual('Middleware throw an error');
+  }
 });
 
 test('response is not ready exception', async () => {

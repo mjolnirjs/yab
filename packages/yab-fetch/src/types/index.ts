@@ -59,9 +59,6 @@ export interface IYabFetchContext {
   arrayBuffer?: ArrayBuffer;
   formData?: FormData;
 
-  // **Error**
-  error: YabFetchError | undefined;
-
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
 }
