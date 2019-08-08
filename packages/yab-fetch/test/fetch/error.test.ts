@@ -18,6 +18,26 @@ test('fetch TypeError', async () => {
   }
 });
 
+test('fetch onError TypeError', async () => {
+  const error = new Error('TypeError: failed to fetch');
+
+  window.fetch = jest.fn(() => Promise.reject(error));
+
+  const onError = jest.fn();
+
+  const fetcher = createYab({
+    onError
+  });
+
+  try {
+    await fetcher.get('github.com');
+  } catch (err) {
+    // Ignore
+  }
+
+  expect(onError).toBeCalledWith(error);
+});
+
 test('fetch status 200', async () => {
   window.fetch = jest.fn(() =>
     Promise.resolve(new Response('{}', { status: 200 }))

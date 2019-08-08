@@ -23,6 +23,7 @@ export interface YabRequestInit extends RequestInit {
   validateResponseStatus?(response: Response): boolean;
   before?(requestInit: RequestInit): RequestInit;
   after?(response: Response): Response;
+  onError?(error: YabFetchError): void;
 }
 
 export interface ExecutableYabRequestInit extends YabRequestInit {

@@ -37,7 +37,14 @@ export class YabFetcher {
 
     const callback = compose([...this._middlewares, fetchMiddleware]);
 
-    await callback(context);
+    try {
+      await callback(context);
+    } catch (error) {
+      if (yabRequestInit.onError) {
+        yabRequestInit.onError(error);
+      }
+      throw error;
+    }
 
     return yabRequestInit.resolveData(context);
   }
