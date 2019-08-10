@@ -1,15 +1,4 @@
 {
-  "compilerOptions": {
-    "rootDir": "src",
-    "module": "es6",
-    "target": "es5",
-    "lib": ["es2018", "esnext", "dom"],
-    "moduleResolution": "node",
-    "strict": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true
-  },
-  "include": [
-    "./src"
-  ]
+  "extends": "../../tsconfig.json",
+  "include": ["src"]
 }
