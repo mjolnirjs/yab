@@ -1,9 +1,25 @@
-import { Method } from '../utils/method';
+import { RequestMethod } from '../enums';
 
+/**
+ * YabFetch Request Headers
+ *
+ * TODO: extends fetch's `Headers`
+ */
 export type RequestHeaders = Record<string, string> | undefined;
 
+/**
+ * YabFetch Request Params
+ */
 export type RequestParams = Record<string, string> | undefined;
 
+/**
+ * YabFetch's request method type
+ */
+export type RequestMethodType = keyof typeof RequestMethod;
+
+/**
+ * YabFetch Response Type
+ */
 export type ResponseType =
   | 'auto'
   | 'json'
@@ -12,6 +28,11 @@ export type ResponseType =
   | 'blob'
   | 'formData';
 
+/**
+ * YabRequestInit
+ *
+ * - extends fetch's `RequestInit`
+ */
 export interface YabRequestInit extends RequestInit {
   baseURL?: string;
   params?: RequestParams;
@@ -19,46 +40,30 @@ export interface YabRequestInit extends RequestInit {
   data?: any;
   url?: string;
   responseType?: ResponseType;
-  resolveData?(context: IYabFetchContext): Promise<unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  resolveData?(context: IYabFetchContext): Promise<any>;
   validateResponseStatus?(response: Response): boolean;
   before?(requestInit: RequestInit): RequestInit;
   after?(response: Response): Response;
+  onError?(error: YabFetchError): void;
 }
 
+/**
+ * ExecutableYabRequestInit
+ *
+ * - RequestInit in yabFetch's context, with `url`, `responseType` and `resolveData` required
+ */
 export interface ExecutableYabRequestInit extends YabRequestInit {
   url: string;
   responseType: ResponseType;
-  resolveData(context: IYabFetchContext): Promise<unknown>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  resolveData(context: IYabFetchContext): Promise<any>;
 }
-
-export interface YabFetcher<TFetchResult> {
-  (url: string, init?: YabRequestInit): Promise<TFetchResult>;
-  get(url: string, config?: YabRequestInit): Promise<TFetchResult>;
-  head(url: string, config?: YabRequestInit): Promise<TFetchResult>;
-  delete(url: string, config?: YabRequestInit): Promise<TFetchResult>;
-  post(
-    url: string,
-    data?: unknown,
-    config?: YabRequestInit
-  ): Promise<TFetchResult>;
-  put(
-    url: string,
-    data?: unknown,
-    config?: YabRequestInit
-  ): Promise<TFetchResult>;
-  patch(
-    url: string,
-    data?: unknown,
-    config?: YabRequestInit
-  ): Promise<TFetchResult>;
-  use(middleware: YabFetchMiddleware | YabFetchMiddleware[]): void;
-}
-
-export type MethodType = keyof typeof Method;
 
 export interface IYabFetchContext {
   // **Request**
   yabRequestInit: ExecutableYabRequestInit;
+  requestInit: RequestInit;
 
   // **Response**
   response: Response;
@@ -69,9 +74,6 @@ export interface IYabFetchContext {
   blob?: Blob;
   arrayBuffer?: ArrayBuffer;
   formData?: FormData;
-
-  // **Error**
-  error: YabFetchError | undefined;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
@@ -86,7 +88,7 @@ export interface YabFetchErrorOptions {
   error?: Error;
   errorMessage?: string;
   yabRequestInit: ExecutableYabRequestInit;
-  requestInit: RequestInit;
+  requestInit?: RequestInit;
   response?: Response;
 }
 

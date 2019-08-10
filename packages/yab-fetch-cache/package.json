@@ -15,7 +15,7 @@
     "build:lib": "tsc -p ./tsconfig.lib.json",
     "build:dist": "cross-env NODE_ENV=production webpack --config webpack.config.js",
     "lint": "eslint src --ext ts",
-    "test": "jest"
+    "test": "jest --no--cache"
   },
   "main": "./dist/lib/index.js",
   "module": "./dist/es/index.js",

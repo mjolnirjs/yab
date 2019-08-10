@@ -10,7 +10,8 @@
     "build:lib": "tsc -p ./tsconfig.lib.json",
     "build:dist": "cross-env NODE_ENV=production webpack --config webpack.config.js",
     "lint": "eslint --ext .ts src/ test/",
-    "test": "npm run clean:test && jest"
+    "test": "npm run clean:test && jest",
+    "start": "jest --watch"
   },
   "main": "./dist/lib/index.js",
   "module": "./dist/es/index.js",

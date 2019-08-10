@@ -1,13 +1,13 @@
 import 'whatwg-fetch';
 
-import { createFetch } from '../../src/core/fetch';
+import { createYab } from '../../src/core/fetch';
 
 test('middleware: json', async () => {
   window.fetch = jest.fn(() =>
     Promise.resolve(new Response('{"data":"data"}'))
   );
 
-  const fetcher = createFetch();
+  const fetcher = createYab();
 
   const result: number[] = [];
 
@@ -29,7 +29,7 @@ test('middleware: json', async () => {
     result.push(6);
   });
 
-  await fetcher('github.com');
+  await fetcher.get('github.com');
 
   expect(result).toEqual([1, 3, 5, 6, 4, 2]);
 });
@@ -39,7 +39,7 @@ test('middleware: json', async () => {
     Promise.resolve(new Response('{"data":"data"}'))
   );
 
-  const fetcher = createFetch();
+  const fetcher = createYab();
 
   const result: number[] = [];
 
@@ -61,7 +61,7 @@ test('middleware: json', async () => {
     }
   ]);
 
-  await fetcher('github.com');
+  await fetcher.get('github.com');
 
   expect(result).toEqual([1, 3, 5, 6, 4, 2]);
 });

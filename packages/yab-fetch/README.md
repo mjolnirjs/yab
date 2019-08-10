@@ -11,8 +11,8 @@ A fetch library.
   - [yarn](#yarn)
   - [CDN](#cdn)
 - [Useage](#useage)
-  - [createFetch(url[, options])](#createfetchurl-options)
-  - [Instance methods](#instance-methods)
+  - [createYab(url[, options])](#createYaburl-options)
+  - [Instance methods](#yab-methods)
   - [Middleware](#middleware)
     - [yab.use(middleware)](#yabusemiddleware)
     - [middleware function](#middleware-function)
@@ -47,9 +47,9 @@ This library can only be used in modern browser environment. [Polyfill](https://
 
 ## Useage
 
-### createFetch(url[, options])
+### createYab(url[, init])
 
-options:
+init:
 
 ```js
 {
@@ -66,22 +66,24 @@ options:
 ### Instance methods
 
 ```ts
-import { createFetch } from 'yab-fetch';
-const instance = createFetch();
+import { createYab } from 'yab-fetch';
+const yab = createYab();
 
-instance.get(url[, options]); // HTTP GET
-instace.post(url[, options]); // HTTP POST
+yab.get(url[, init]);
+yab.post(url[, init]);
+// ...
 ```
 
-### Middleware
+### Middlewares
 
 #### yab.use(middleware)
 
 ```ts
-import { createFetch } from 'yab-fetch';
-const instance = createFetch();
+import { createYab } from 'yab-fetch';
 
-instance.use(async (ctx, next) => {
+const yab = createYab();
+
+yab.use(async (ctx, next) => {
   await next();
 });
 ```

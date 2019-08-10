@@ -2,8 +2,6 @@ import compose from 'koa-compose';
 
 import {
   YabRequestInit,
-  YabFetcher,
-  MethodType,
   YabFetchMiddleware,
   IYabFetchContext
 } from '../types/index';
@@ -11,8 +9,9 @@ import { getYabRequestInit } from '../utils';
 import { YabFetchContext } from './context';
 import { DEFAULT_YAB_REQUEST_INIT } from '../defaults';
 import { createFetchMiddleware } from './fetchMiddleware';
+import { RequestMethod } from '../enums';
 
-export class YabFetch {
+export class YabFetcher {
   private _requestInit?: YabRequestInit;
 
   private _middlewares: YabFetchMiddleware[];
@@ -22,7 +21,7 @@ export class YabFetch {
     this._requestInit = requestInit;
   }
 
-  public fetch = async (url: string, directOptions?: YabRequestInit) => {
+  public async fetch(url: string, directOptions?: YabRequestInit) {
     const yabRequestInit = getYabRequestInit(
       { ...DEFAULT_YAB_REQUEST_INIT },
       this._requestInit,
@@ -36,48 +35,107 @@ export class YabFetch {
 
     const callback = compose([...this._middlewares, fetchMiddleware]);
 
-    await callback(context);
-
-    if (context.error) {
-      throw context.error;
+    try {
+      await callback(context);
+    } catch (error) {
+      if (yabRequestInit.onError) {
+        yabRequestInit.onError(error);
+      }
+      throw error;
     }
 
     return yabRequestInit.resolveData(context);
-  };
+  }
 
-  public use = (middleware: YabFetchMiddleware | YabFetchMiddleware[]) => {
+  public use(middleware: YabFetchMiddleware | YabFetchMiddleware[]) {
     if (Array.isArray(middleware)) {
       this._middlewares.push(...middleware);
     } else {
       this._middlewares.push(middleware);
     }
     return this;
-  };
+  }
+
+  /**
+   * Performs a request with `get` http method.
+   */
+  public get<T>(url: string, yabInit?: YabRequestInit): Promise<T> {
+    return this.fetch(url, {
+      method: RequestMethod.get,
+      ...yabInit
+    });
+  }
+
+  /**
+   * Performs a request with `post` http method.
+   */
+  public post<T>(
+    url: string,
+    data?: unknown,
+    yabInit?: YabRequestInit
+  ): Promise<T> {
+    return this.fetch(url, {
+      method: RequestMethod.post,
+      data,
+      ...yabInit
+    });
+  }
+
+  /**
+   * Performs a request with `put` http method.
+   */
+  public put<T>(
+    url: string,
+    data?: unknown,
+    yabInit?: YabRequestInit
+  ): Promise<T> {
+    return this.fetch(url, {
+      method: RequestMethod.put,
+      data,
+      ...yabInit
+    });
+  }
+
+  /**
+   * Performs a request with `delete` http method.
+   */
+  public delete<T>(url: string, yabInit?: YabRequestInit): Promise<T> {
+    return this.fetch(url, {
+      method: RequestMethod.delete,
+      ...yabInit
+    });
+  }
+
+  /**
+   * Performs a request with `patch` http method.
+   */
+  public patch<T>(
+    url: string,
+    data?: unknown,
+    yabInit?: YabRequestInit
+  ): Promise<T> {
+    return this.fetch(url, {
+      method: RequestMethod.patch,
+      data,
+      ...yabInit
+    });
+  }
+
+  /**
+   * Performs a request with `head` http method.
+   */
+  public head<T>(url: string, yabInit?: YabRequestInit): Promise<T> {
+    return this.fetch(url, {
+      method: RequestMethod.head,
+      ...yabInit
+    });
+  }
 }
 
-export function createFetch<TFetchResult = IYabFetchContext>(
+export function createYab(
   requestInit?: YabRequestInit & {
-    resolveData?(context: IYabFetchContext): Promise<TFetchResult>;
+    resolveData?(context: IYabFetchContext): Promise<unknown>;
   }
-): YabFetcher<TFetchResult> {
-  const yabFetch = new YabFetch(requestInit);
-
-  const currentFetch = yabFetch.fetch as YabFetcher<TFetchResult>;
-
-  (['get', 'head', 'delete'] as MethodType[]).forEach((method) => {
-    currentFetch[method] = (url: string, yabInit?: YabRequestInit) =>
-      currentFetch(url, { method, responseType: 'json', ...yabInit });
-  });
-
-  (['post', 'put', 'patch'] as MethodType[]).forEach((method) => {
-    currentFetch[method] = (
-      url: string,
-      data?: unknown,
-      yabInit?: YabRequestInit
-    ) => currentFetch(url, { method, data, ...yabInit });
-  });
-
-  currentFetch.use = yabFetch.use;
-
-  return currentFetch;
+) {
+  return new YabFetcher(requestInit);
 }
