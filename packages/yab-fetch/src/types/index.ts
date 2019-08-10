@@ -1,9 +1,25 @@
 import { RequestMethod } from '../enums';
 
+/**
+ * YabFetch Request Headers
+ *
+ * TODO: extends fetch's `Headers`
+ */
 export type RequestHeaders = Record<string, string> | undefined;
 
+/**
+ * YabFetch Request Params
+ */
 export type RequestParams = Record<string, string> | undefined;
 
+/**
+ * YabFetch's request method type
+ */
+export type RequestMethodType = keyof typeof RequestMethod;
+
+/**
+ * YabFetch Response Type
+ */
 export type ResponseType =
   | 'auto'
   | 'json'
@@ -12,6 +28,11 @@ export type ResponseType =
   | 'blob'
   | 'formData';
 
+/**
+ * YabRequestInit
+ *
+ * - extends fetch's `RequestInit`
+ */
 export interface YabRequestInit extends RequestInit {
   baseURL?: string;
   params?: RequestParams;
@@ -19,6 +40,7 @@ export interface YabRequestInit extends RequestInit {
   data?: any;
   url?: string;
   responseType?: ResponseType;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   resolveData?(context: IYabFetchContext): Promise<any>;
   validateResponseStatus?(response: Response): boolean;
   before?(requestInit: RequestInit): RequestInit;
@@ -26,24 +48,17 @@ export interface YabRequestInit extends RequestInit {
   onError?(error: YabFetchError): void;
 }
 
+/**
+ * ExecutableYabRequestInit
+ *
+ * - RequestInit in yabFetch's context, with `url`, `responseType` and `resolveData` required
+ */
 export interface ExecutableYabRequestInit extends YabRequestInit {
   url: string;
   responseType: ResponseType;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   resolveData(context: IYabFetchContext): Promise<any>;
 }
-
-export interface IYabFetcher {
-  (url: string, init?: YabRequestInit): Promise<unknown>;
-  get(url: string, config?: YabRequestInit): Promise<unknown>;
-  post(url: string, data?: unknown, config?: YabRequestInit): Promise<unknown>;
-  put(url: string, data?: unknown, config?: YabRequestInit): Promise<unknown>;
-  delete(url: string, config?: YabRequestInit): Promise<unknown>;
-  patch(url: string, data?: unknown, config?: YabRequestInit): Promise<unknown>;
-  head(url: string, config?: YabRequestInit): Promise<unknown>;
-  use(middleware: YabFetchMiddleware | YabFetchMiddleware[]): void;
-}
-
-export type RequestMethodType = keyof typeof RequestMethod;
 
 export interface IYabFetchContext {
   // **Request**
