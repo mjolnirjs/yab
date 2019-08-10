@@ -2,8 +2,6 @@ import compose from 'koa-compose';
 
 import {
   YabRequestInit,
-  IYabFetcher,
-  RequestMethodType,
   YabFetchMiddleware,
   IYabFetchContext
 } from '../types/index';
@@ -86,7 +84,11 @@ export class YabFetcher {
   /**
    * Performs a request with `put` http method.
    */
-  public put(url: string, data?: unknown, yabInit?: YabRequestInit) {
+  public put<T>(
+    url: string,
+    data?: unknown,
+    yabInit?: YabRequestInit
+  ): Promise<T> {
     return this.fetch(url, {
       method: RequestMethod.put,
       data,
@@ -97,7 +99,7 @@ export class YabFetcher {
   /**
    * Performs a request with `delete` http method.
    */
-  public delete(url: string, yabInit?: YabRequestInit) {
+  public delete<T>(url: string, yabInit?: YabRequestInit): Promise<T> {
     return this.fetch(url, {
       method: RequestMethod.delete,
       ...yabInit
@@ -107,7 +109,11 @@ export class YabFetcher {
   /**
    * Performs a request with `patch` http method.
    */
-  public patch(url: string, data?: unknown, yabInit?: YabRequestInit) {
+  public patch<T>(
+    url: string,
+    data?: unknown,
+    yabInit?: YabRequestInit
+  ): Promise<T> {
     return this.fetch(url, {
       method: RequestMethod.patch,
       data,
@@ -118,7 +124,7 @@ export class YabFetcher {
   /**
    * Performs a request with `head` http method.
    */
-  public head(url: string, yabInit?: YabRequestInit) {
+  public head<T>(url: string, yabInit?: YabRequestInit): Promise<T> {
     return this.fetch(url, {
       method: RequestMethod.head,
       ...yabInit
