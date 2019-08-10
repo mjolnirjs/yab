@@ -19,7 +19,7 @@
     "changelog": "lerna-changelog",
     "build": "lerna run build",
     "lint": "lerna run lint --parallel",
-    "test": "lerna run test",
+    "test": "jest",
     "publish": "lerna publish",
     "release": "npm run test && npm run build && npm run publish"
   },
