@@ -42,17 +42,5 @@
     "lint-staged": "^9.2.0",
     "rimraf": "^2.6.3",
     "typescript": "^3.5.3"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "**/*.{js, ts}": [
-      "prettier --write",
-      "eslint --fix",
-      "git add"
-    ]
   }
 }
