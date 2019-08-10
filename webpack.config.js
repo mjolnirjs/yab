@@ -1,19 +1,8 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
-const { resolve } = require('./utils');
-const projectName = 'yab-fetch-logger';
-
 module.exports = {
-  entry: {
-    [`${projectName}.min`]: [resolve('src')] // same as resolve('src/index.js');
-  },
-  output: {
-    filename: '[name].js',
-    path: resolve('dist'),
-    library: projectName,
-    libraryTarget: 'umd'
-  },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json']
   },

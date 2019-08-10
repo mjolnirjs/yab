@@ -3,6 +3,7 @@
     "module": "es6",
     "target": "es5",
     "lib": ["esnext", "dom"],
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "moduleResolution": "node"
   }
 }

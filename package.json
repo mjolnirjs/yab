@@ -14,10 +14,11 @@
   },
   "homepage": "https://github.com/mjolnirjs/yab#readme",
   "scripts": {
+    "start": "jest --watch",
     "clean": "lerna run clean --parallel",
     "changelog": "lerna-changelog",
-    "build": "lerna exec -- npm run build",
-    "lint": "lerna run lint",
+    "build": "lerna run build",
+    "lint": "lerna run lint --parallel",
     "test": "lerna run test",
     "publish": "lerna publish",
     "release": "npm run test && npm run build && npm run publish"
