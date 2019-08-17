@@ -1,32 +1,30 @@
 import { createFetch } from '../../yab-fetch/src';
 import { createLogger } from '../src';
 
-const request = createFetch({
+const yab = createFetch({
   onError: (e) => {
     console.log(`global error handle: ${e}`);
   }
 });
-request.use(
+yab.use(
   createLogger({
-    collapsed: false
+    collapsed: true
   })
 );
 
-request.get('https://jsonplaceholder.typicode.com/todos/1');
+yab.get('https://jsonplaceholder.typicode.com/todos/1?a=1&b=2');
 
 try {
-  request.fetch('https://jsonplaceholder.typicode.com/todos/1', {
+  yab.fetch('https://jsonplaceholder.typicode.com/todos/1', {
     method: 'post',
-    data: {
-      a: 1
-    }
+    data: {}
   });
 } catch (e) {
   console.log(`can not catch the error: ${e}`);
 }
 
 // post api: https://jsonplaceholder.typicode.com/guide.html
-request.post('https://jsonplaceholder.typicode.com/posts', {
+yab.post('https://jsonplaceholder.typicode.com/posts', {
   data: {
     title: 'foo',
     body: 'bar',
