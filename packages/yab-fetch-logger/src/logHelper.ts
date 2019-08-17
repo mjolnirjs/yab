@@ -7,7 +7,7 @@ export const logBeforeFetch = (logger: Logger, ctx: IYabFetchContext): void => {
     yabRequestInit,
     yabRequestInit: { url, method, data }
   } = ctx;
-  logger.group('%cbefore fetch', 'color: #33b9f9');
+  logger.group('%cbefore fetch', 'color: #416eb6');
   logger.log('yabRequestInit:', yabRequestInit);
   logger.log('url:', url);
   logger.log('method:', method);
@@ -17,7 +17,7 @@ export const logBeforeFetch = (logger: Logger, ctx: IYabFetchContext): void => {
 
 export const logAfterFetch = (logger: Logger, ctx: IYabFetchContext): void => {
   const { response } = ctx;
-  logger.group('%cafter fetch', 'color:#61bb64');
+  logger.group('%cafter fetch', 'color:#715ca8');
   logger.log('response:', response);
   logger.log('ctx:', ctx);
   logger.groupEnd();

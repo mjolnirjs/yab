@@ -27,18 +27,19 @@ export const createLogger = (options?: Options): YabFetchMiddleware => {
       const costTime = endTime.getTime() - startTime.getTime();
 
       logger.group(
-        `yab: %c${method} %c${url} %c@ ${startTime.toLocaleString()}, cost: ${costTime} ms`,
-        'color: #6f42c1;font-size: 14px;',
-        'color: #005cc5;font-size: 14px;',
-        'color: #666'
+        `%c${method.toUpperCase()} %c${url} %c@ ${startTime.toLocaleTimeString()}, cost: ${costTime} ms`,
+        'color: #61bd4f',
+        'color: #324856',
+        'color: #50697d'
       );
 
       logBeforeFetch(logger, ctx);
       logAfterFetch(logger, ctx);
     } catch (e) {
-      logError(logger, e);
-    } finally {
-      logger.groupEnd();
+      // logError(logger, e);
+      throw e;
     }
+
+    logger.groupEnd();
   };
 };
