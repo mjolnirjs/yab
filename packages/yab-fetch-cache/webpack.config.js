@@ -13,7 +13,7 @@ const productionConfig = merge(baseConfig, {
   mode: 'production',
   output: {
     filename: `${projectName}.min.js`,
-    path: path.join(__dirname, '..', 'dist'),
+    path: path.join(__dirname, 'dist'),
     library: projectName,
     libraryTarget: 'umd'
   },
