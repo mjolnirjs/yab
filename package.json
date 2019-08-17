@@ -41,7 +41,7 @@
     "jest": "^24.8.0",
     "ts-jest": "^24.0.2",
     "lint-staged": "^9.2.0",
-    "rimraf": "^2.6.3",
+    "rimraf": "^3.0.0",
     "typescript": "^3.5.3",
     "cache-loader": "^4.0.1",
     "case-sensitive-paths-webpack-plugin": "^2.2.0",
