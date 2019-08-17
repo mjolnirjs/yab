@@ -20,17 +20,20 @@ export const createLogger = (options?: Options): YabFetchMiddleware => {
       yabRequestInit: { url, method }
     } = ctx;
 
-    logger.group(
-      `📖 yab: %c${method} %c${url} %c@ ${new Date()}`,
-      'color: #6f42c1;font-size: 14px;',
-      'color: #005cc5;font-size: 14px;',
-      'color: #666'
-    );
-
-    logBeforeFetch(logger, ctx);
-
+    const startTime = new Date();
     try {
       await next();
+      const endTime = new Date();
+      const costTime = endTime.getTime() - startTime.getTime();
+
+      logger.group(
+        `yab: %c${method} %c${url} %c@ ${startTime.toLocaleString()}, cost: ${costTime} ms`,
+        'color: #6f42c1;font-size: 14px;',
+        'color: #005cc5;font-size: 14px;',
+        'color: #666'
+      );
+
+      logBeforeFetch(logger, ctx);
       logAfterFetch(logger, ctx);
     } catch (e) {
       logError(logger, e);
