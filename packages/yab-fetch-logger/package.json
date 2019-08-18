@@ -9,16 +9,20 @@
     "url": "git+https://github.com/mjolnirjs/yab.git"
   },
   "scripts": {
+    "dev": "parcel ./example/index.html --https",
+    "start": "npm run dev",
+    "serve": "serve dist/example",
     "clean": "rimraf dist",
-    "build": "npm run clean && npm run build:es && npm run build:lib && npm run build:dist",
+    "build": "npm run clean && npm run build:es && npm run build:lib && npm run build:umd && npm run build:example",
     "build:es": "tsc -p ./tsconfig.es.json",
     "build:lib": "tsc -p ./tsconfig.lib.json",
-    "build:dist": "cross-env NODE_ENV=production webpack --config webpack.config.js",
-    "lint": "eslint src --ext ts"
+    "build:umd": "cross-env NODE_ENV=production webpack --config webpack.config.js",
+    "build:example": "parcel build ./example/index.html -d dist/example --log-level 1",
+    "lint": "eslint --ext .ts src/"
   },
-  "main": "./dist/lib/index.js",
-  "module": "./dist/es/index.js",
-  "types": "./dist/types/index.d.ts",
+  "main": "dist/lib/index.js",
+  "module": "dist/es/index.js",
+  "types": "dist/types/index.d.ts",
   "devDependencies": {
     "whatwg-fetch": "^3.0.0",
     "yab-fetch": "^0.0.1-alpha.4"

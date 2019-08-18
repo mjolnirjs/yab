@@ -6,5 +6,6 @@
     "sourceMap": false,
     "declaration": true,
     "declarationDir": "dist/types"
-  }
+  },
+  "include": ["src"]
 }
