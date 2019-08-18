@@ -1,6 +1,6 @@
 {
   "name": "yab-fetch-logger",
-  "version": "0.0.1-alpha.4",
+  "version": "0.0.1-alpha.5",
   "description": "",
   "homepage": "https://github.com/mjolnirjs/yab/tree/master/packages/yab-fetch-logger#readme",
   "license": "MIT",
@@ -25,7 +25,7 @@
   "types": "dist/types/index.d.ts",
   "devDependencies": {
     "whatwg-fetch": "^3.0.0",
-    "yab-fetch": "^0.0.1-alpha.4"
+    "yab-fetch": "^0.0.1-alpha.5"
   },
   "files": [
     "dist"
