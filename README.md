@@ -1,8 +1,7 @@
 <p align="center"><img width="300" src="resources/logo.png" alt="logo" /></p>
 <div align="center">
 <p>A simple fetch library.</p>
-<a href="https://circleci.com/gh/mjolnirjs/yab/tree/master"><img src="https://circleci.com/gh/mjolnirjs/yab/tree/master.svg?style=shield" /></a>
-<a href="https://codecov.io/gh/mjolnirjs/yab"><img src="https://codecov.io/gh/mjolnirjs/yab/branch/master/graph/badge.svg" /></a>
+<a><img alt="npm" src="https://img.shields.io/npm/v/yab-fetch"></a><a href="https://circleci.com/gh/mjolnirjs/yab/tree/master"><img src="https://circleci.com/gh/mjolnirjs/yab/tree/master.svg?style=shield" /></a><a href="https://codecov.io/gh/mjolnirjs/yab"><img src="https://codecov.io/gh/mjolnirjs/yab/branch/master/graph/badge.svg" /></a>
 </div>
 
 ---
