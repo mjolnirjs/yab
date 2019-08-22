@@ -9,7 +9,7 @@ export class IDBCacheStorage implements CacheStorage {
 
   private _request!: IDBRequest;
 
-  private _store!: IDBObjectStore;
+  private _db!: IDBDatabase;
 
   public constructor(databaseName = DB_NAME) {
     this._databaseName = databaseName;
@@ -33,26 +33,30 @@ export class IDBCacheStorage implements CacheStorage {
     await promisifyRequest(openRequest);
 
     this._request = openRequest;
-    this._store = openRequest.result
-      .transaction([STORE_NAME], 'readwrite')
-      .objectStore(STORE_NAME);
+    this._db = openRequest.result;
+  }
+
+  protected getObjectStore(
+    mode: IDBTransactionMode = 'readwrite'
+  ): IDBObjectStore {
+    return this._db.transaction([STORE_NAME], mode).objectStore(STORE_NAME);
   }
 
   public async get(key: string): Promise<CacheObject> {
-    if (!this._store) {
+    if (!this._db) {
       await this.init();
     }
 
-    const request = this._store.get(key);
+    const request = this.getObjectStore('readonly').get(key);
     return promisifyRequest(request);
   }
 
   public async set(key: string, value: object): Promise<unknown> {
-    if (!this._store) {
+    if (!this._db) {
       await this.init();
     }
 
-    const request = this._store.put({
+    const request = this.getObjectStore('readwrite').put({
       url: key,
       data: value
     });
