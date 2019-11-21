@@ -21,7 +21,7 @@
   "module": "./dist/es/index.js",
   "types": "./dist/types/index.d.ts",
   "devDependencies": {
-    "fake-indexeddb": "^2.1.1",
+    "fake-indexeddb": "^3.0.0",
     "whatwg-fetch": "^3.0.0",
     "yab-fetch": "^0.0.1-alpha.5"
   },
