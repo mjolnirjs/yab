@@ -52,7 +52,7 @@
     "rimraf": "^3.0.0",
     "serve": "^11.1.0",
     "terser-webpack-plugin": "^2.0.0",
-    "ts-jest": "^24.0.2",
+    "ts-jest": "^25.0.0",
     "ts-loader": "^6.0.4",
     "typescript": "^3.5.3",
     "webpack": "^4.35.3",
