@@ -42,7 +42,7 @@
     "fork-ts-checker-notifier-webpack-plugin": "^2.0.0",
     "fork-ts-checker-webpack-plugin": "^4.0.0",
     "friendly-errors-webpack-plugin": "^1.7.0",
-    "husky": "^3.0.1",
+    "husky": "^5.0.0",
     "jest": "^26.0.0",
     "lerna": "^3.15.0",
     "lerna-changelog": "^0.8.2",
